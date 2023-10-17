@@ -1,0 +1,55 @@
+
+
+/* Start of external fonts */
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+
+/* End of external fonts */
+
+/* Start of Navigation Bar */
+.navbar{
+    height: 60px;
+    background: #BF4C41;
+}
+
+.navbar .site-name{
+    display: flex;
+    justify-content: start;
+    align-items: center;  
+}
+
+.navbar .site-name h1, i{
+    color: #fff;
+    margin-right: 15px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5em;
+}
+
+.navigation{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+.navigation .cart i{
+    font-size: 2.2em;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+}
+
+.navigation .cart .counter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 1;
+    top:3px;
+    right: 27px;
+    background: #ec5c2c;
+    border-radius: 20px;
+    width: 20px;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* End of Navigation Bar */
