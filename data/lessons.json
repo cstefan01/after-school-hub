@@ -1,0 +1,23 @@
+{
+    "lessons": [
+      {
+        "subject": "Maths",
+        "location": "London",
+        "price": 100,
+        "spaces": 5
+      },
+      {
+        "subject": "Math",
+        "location": "Oxford",
+        "price": 100,
+        "spaces": 5
+      },
+      {
+        "subject": "English",
+        "location": "London",
+        "price": 100,
+        "spaces": 5
+      }
+    ]
+  }
+  
