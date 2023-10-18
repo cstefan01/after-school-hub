@@ -6,10 +6,25 @@
 
 /* End of external fonts */
 
+
+/* Start of generic styling */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* End of generic styling */
+
+
 /* Start of Navigation Bar */
 .navbar{
     height: 60px;
     background: #BF4C41;
+    position: absolute;
+    top:0;
 }
 
 .navbar .site-name{
@@ -53,3 +68,32 @@
 }
 
 /* End of Navigation Bar */
+
+
+/* Start of Content */
+
+.content {
+    flex: 1;
+    height: 100vh;
+}
+
+/* End of Content /*
+
+
+/* Start of Footer */
+
+.footer{
+    height: 400px;
+    background: #c16f67;
+}
+
+.copyright{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    color: #fff;
+    background: #BF4C41;
+}
+
+/* End of Footer */
