@@ -3,7 +3,8 @@
 /* Start of external fonts */
 
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 /* End of external fonts */
 
 
@@ -77,6 +78,61 @@ body {
     height: 100vh;
 }
 
+.lesson-card{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: 100px;
+    height: 500px;
+    width: 500px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+
+}
+
+.lesson-icon{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 150px;
+    height: 150px;
+    background-color: #BF4C41;
+    border-radius: 100px;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.lesson-icon i{
+    font-size: 4em;
+    margin-top: 10px;
+}
+
+.lesson-icon p{
+    color: #fff;
+    font-size: 1.6em;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.lesson-info{
+    display: flex;
+    flex-direction: column;
+    background-color: red;
+    width: 100%;
+    padding: 10px;
+}
+
+.card-button{
+    border: none;
+    width: 340px;
+    height: 70px;
+    background-color: #BF4C41;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1.5em;
+    font-family: 'Anton', sans-serif;
+    letter-spacing: 0.1em;
+}
 /* End of Content /*
 
 
