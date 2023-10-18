@@ -10,7 +10,8 @@ createApp({
            },
            cart:{
             counter: 0,
-            lessons: []
+            lessons: [],
+            show: false
            },
            copyright:{
             year: 2023
@@ -36,6 +37,9 @@ createApp({
         addToCart(lesson){
             this.cart.lessons.push(lesson)
             this.cart.counter = this.cart.lessons.length
+        },
+        toggleCart(){
+            this.cart.show = !this.cart.show
         }
     },
     mounted(){

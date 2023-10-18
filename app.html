@@ -17,7 +17,7 @@
                     <h1>{{site.name}}</h1>
                 </div>
                 <div class="navigation col-6 h-100 p-3">
-                    <div class="cart">
+                    <div class="cart" @click="toggleCart">
                         <i class="fa-solid fa-cart-shopping"></i>
                         <div class="counter">
                             {{cart.counter}}
@@ -26,8 +26,13 @@
                     
                 </div>
            </div>
+
+
+           <div v-if="cart.show" class="cart-content d-flex justify-content-center align-items-center">
+             cart 
+           </div>
            
-           <div class="content d-flex justify-content-center align-items-center">
+           <div v-else class="content d-flex justify-content-center align-items-center">
 
             <div v-if="site.isFetchingError">
                 fetching error
