@@ -1,22 +1,36 @@
 {
     "lessons": [
       {
+        "id": 1,
+        "icon": "fa-solid fa-calculator",
         "subject": "Maths",
         "location": "London",
         "price": 100,
         "spaces": 5
       },
       {
-        "subject": "Math",
+        "id": 2,
+        "icon": "fa-solid fa-calculator",
+        "subject": "Maths",
         "location": "Oxford",
         "price": 100,
         "spaces": 5
       },
       {
+        "id": 3,
+        "icon": "fa-solid fa-spell-check",
         "subject": "English",
         "location": "London",
         "price": 100,
         "spaces": 5
+      },
+      {
+        "id": 3,
+        "icon": "fa-solid fa-music",
+        "subject": "Music",
+        "location": "Romania",
+        "price": 430,
+        "spaces": 10
       }
     ]
   }

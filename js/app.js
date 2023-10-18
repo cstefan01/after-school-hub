@@ -13,7 +13,9 @@ createApp({
            copyright:{
             year: 2023
            },
-           lessons: {},
+           lessons: {
+            lessons: []
+          },
 
         
         }
