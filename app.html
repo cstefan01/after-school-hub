@@ -27,9 +27,13 @@
                 </div>
            </div>
            
-           
-           <div class="content d-flex justify-content-center align-items-center ">
-            <div class="lesson-card" v-for="lesson in lessons.lessons" :key="lesson.id">
+           <div class="content d-flex justify-content-center align-items-center">
+
+            <div v-if="site.isFetchingError">
+                fetching error
+            </div>
+
+            <div v-else class="lesson-card" v-for="lesson in lessons.lessons" :key="lesson.id">
                 <div class="lesson-icon">
                     <i :class="lesson.icon"></i>
                     <p>{{lesson.subject}}</p>
@@ -40,8 +44,8 @@
                     <span>Price: £{{lesson.price}}</span>
                     <span>Available Spaces: {{lesson.spaces}} spaces left </span>
                 </div>
-
-                <button class="card-button">Add to Cart</button>
+                
+                <button class="card-button" @click = "addToCart(lesson)">Add to Cart</button>
 
             </div>
             

@@ -5,10 +5,12 @@ createApp({
     data(){
         return{
            site:{
-            name: "After School Hub"
+            name: "After School Hub",
+            isFetchingError: false,
            },
            cart:{
-            counter: 0
+            counter: 0,
+            lessons: []
            },
            copyright:{
             year: 2023
@@ -16,8 +18,6 @@ createApp({
            lessons: {
             lessons: []
           },
-
-        
         }
     },
     methods:{
@@ -25,15 +25,17 @@ createApp({
             fetch('/data/lessons.json')
                 .then(response => {
                     if(!response.ok){
-                        throw new Error('Network response was not ok')
+                        this.site.isFetchingError = true
                     }
                     return response.json()
                 })
                 .then(data =>{
-                    this.lessons = data
-                    
+                    this.lessons = data 
                 })
-
+        },
+        addToCart(lesson){
+            this.cart.lessons.push(lesson)
+            this.cart.counter = this.cart.lessons.length
         }
     },
     mounted(){
