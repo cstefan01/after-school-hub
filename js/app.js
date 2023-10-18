@@ -13,6 +13,28 @@ createApp({
            copyright:{
             year: 2023
            },
+           lessons: {},
+
+        
         }
+    },
+    methods:{
+        fetchLessons(){
+            fetch('/data/lessons.json')
+                .then(response => {
+                    if(!response.ok){
+                        throw new Error('Network response was not ok')
+                    }
+                    return response.json()
+                })
+                .then(data =>{
+                    this.lessons = data
+                    
+                })
+
+        }
+    },
+    mounted(){
+        this.fetchLessons();
     }
   }).mount('#app')
