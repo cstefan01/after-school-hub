@@ -25,12 +25,60 @@
         "spaces": 5
       },
       {
-        "id": 3,
+        "id": 4,
         "icon": "fa-solid fa-music",
         "subject": "Music",
         "location": "Romania",
         "price": 430,
-        "spaces": 10
+        "spaces": 5
+      },
+      {
+        "id": 4,
+        "icon": "fa-solid fa-music",
+        "subject": "Music",
+        "location": "Romania",
+        "price": 430,
+        "spaces": 5
+      },
+      {
+        "id": 4,
+        "icon": "fa-solid fa-music",
+        "subject": "Music",
+        "location": "Romania",
+        "price": 430,
+        "spaces": 5
+      },
+      {
+        "id": 4,
+        "icon": "fa-solid fa-music",
+        "subject": "Music",
+        "location": "Romania",
+        "price": 430,
+        "spaces": 5
+      },
+      {
+        "id": 4,
+        "icon": "fa-solid fa-music",
+        "subject": "Music",
+        "location": "Romania",
+        "price": 430,
+        "spaces": 5
+      },
+      {
+        "id": 4,
+        "icon": "fa-solid fa-music",
+        "subject": "Music",
+        "location": "Romania",
+        "price": 430,
+        "spaces": 5
+      },
+      {
+        "id": 4,
+        "icon": "fa-solid fa-music",
+        "subject": "Music",
+        "location": "Romania",
+        "price": 430,
+        "spaces": 5
       }
     ]
   }

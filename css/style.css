@@ -74,8 +74,12 @@ body {
 /* Start of Content */
 
 .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex: 1;
     height: 100vh;
+    flex-wrap: wrap;
 }
 
 .lesson-card{
@@ -154,3 +158,9 @@ body {
 }
 
 /* End of Footer */
+
+
+[v-cloak] {
+    display: none;
+}
+  

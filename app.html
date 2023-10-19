@@ -10,7 +10,7 @@
     <script src="https://kit.fontawesome.com/dc398583c6.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div id="app">
+    <div id="app" v-cloak>
             <div class="navbar container-fluid p-0">
                 <div class="site-name col-6 p-4 h-100">
                     <i class="fa-solid fa-school"></i>
@@ -29,12 +29,28 @@
 
 
            <div v-if="cart.show" class="cart-content d-flex justify-content-center align-items-center">
-             cart 
+             
+            <div class="lesson-card" v-for="lesson in cart.lessons" :key="lesson.id">
+                <div class="lesson-icon">
+                    <i :class="lesson.icon"></i>
+                    <p>{{lesson.subject}}</p>
+                </div>
+
+                <div class="lesson-info">
+                    <span>Location: {{lesson.location}}</span>
+                    <span>Price: £{{lesson.price}}</span>
+                    <span>Available Spaces: {{lesson.spaces}} spaces left </span>
+                </div>
+                
+                <button class="card-button" @click = "addToCart(lesson)" ref="btnAddToCart">Remove</button>
+
+            </div>
            </div>
            
-           <div v-else class="content d-flex justify-content-center align-items-center">
+           <div v-else class="content">
+            
 
-            <div v-if="site.isFetchingError">
+            <div v-if="lessons.isOnFetchingError">
                 fetching error
             </div>
 
@@ -50,13 +66,13 @@
                     <span>Available Spaces: {{lesson.spaces}} spaces left </span>
                 </div>
                 
-                <button class="card-button" @click = "addToCart(lesson)">Add to Cart</button>
+                <button class="card-button" @click = "addToCart(lesson)" ref="btnAddToCart">Add to Cart</button>
 
             </div>
             
           </div>
      
-        <div class="footer container-fluid">
+        <!-- <div class="footer container-fluid">
             <div class="col-12">
 
             </div>
@@ -64,7 +80,7 @@
         </div>
         <div class="copyright container-fluid">
          <span>Copyright &copy; {{copyright.year}}, {{site.name}} | All Rights Reserved.</span>
-        </div>
+        </div> -->
 
     </div>
 
