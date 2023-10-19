@@ -22,7 +22,7 @@ createApp({
     },
     methods:{
         fetchLessons(){
-            fetch('/data/lessons.json')
+            fetch('../data/lessons.json')
                 .then(response => {
                     if(!response.ok){
                         this.lessons.isOnFetchingError = true
@@ -35,8 +35,6 @@ createApp({
         },
         addToCart(lesson){
             if(lesson.spaces != 0){
-                this.$refs.btnAddToCart.disabled = false;
-
                 lesson.spaces -= 1
                 this.cart.lessons.push(lesson)
                 this.cart.counter = this.cart.lessons.length

@@ -30,7 +30,7 @@
 
            <div v-if="cart.show" class="cart-content d-flex justify-content-center align-items-center">
              
-            <div class="lesson-card" v-for="lesson in cart.lessons" :key="lesson.id">
+            <div class="lesson-card"  v-if="cart.lessons.length !=0" v-for="lesson in cart.lessons" :key="lesson.id">
                 <div class="lesson-icon">
                     <i :class="lesson.icon"></i>
                     <p>{{lesson.subject}}</p>
@@ -42,7 +42,12 @@
                     <span>Available Spaces: {{lesson.spaces}} spaces left </span>
                 </div>
                 
-                <button class="card-button" @click = "removeFromCart(lesson)" ref="btnAddToCart">Remove</button>
+                <button class="card-button" @click = "removeFromCart(lesson)">Remove</button>
+
+            </div>
+
+            <div v-else>
+                cart is empty
 
             </div>
            </div>
@@ -66,7 +71,7 @@
                     <span>Available Spaces: {{lesson.spaces}} spaces left </span>
                 </div>
                 
-                <button class="card-button" @click = "addToCart(lesson)" ref="btnAddToCart">Add to Cart</button>
+                <button class="card-button" @click = "addToCart(lesson)">Add to Cart</button>
 
             </div>
             
