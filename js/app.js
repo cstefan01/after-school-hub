@@ -40,10 +40,19 @@ createApp({
                 lesson.spaces -= 1
                 this.cart.lessons.push(lesson)
                 this.cart.counter = this.cart.lessons.length
-            }else{
-                this.$refs.btnAddToCart.disabled = true;
             }
            
+        },
+        removeFromCart(lesson){
+            for(let l of this.cart.lessons){
+                if (JSON.stringify(l) === JSON.stringify(lesson)){
+                    this.cart.lessons.pop(l)
+                    this.cart.counter = this.cart.lessons.length
+                    l.spaces += 1;
+                    break  
+                }
+            }
+
         },
         toggleCart(){
             const cartLength = this.cart.lessons.length
