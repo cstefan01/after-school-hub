@@ -22,7 +22,7 @@ createApp({
     },
     methods:{
         fetchLessons(){
-            fetch('../data/lessons.json')
+            fetch('./data/lessons.json')
                 .then(response => {
                     if(!response.ok){
                         this.lessons.isOnFetchingError = true
