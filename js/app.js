@@ -17,7 +17,8 @@ createApp({
            lessons: {
             lessons: [],
             isOnFetchingError: false,
-          }
+          },
+          query: '',
         }
     },
     methods:{
@@ -63,5 +64,17 @@ createApp({
     },
     mounted(){
         this.fetchLessons();
+    },
+    computed: {
+        filteredLessons() {
+            const queryWords = this.query.toLowerCase().split(' ')
+
+            return this.lessons.lessons.filter(lesson => {
+                return queryWords.every(word => {
+                    return lesson.subject.toLowerCase().includes(word) || lesson.location.toLowerCase().includes(word) 
+                })
+            })
+
+        }
     }
   }).mount('#app')
