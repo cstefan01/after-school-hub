@@ -73,63 +73,55 @@ body {
 
 /* Start of Content */
 
-.content {
+.lessons-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     flex: 1;
-    height: 100vh;
     flex-wrap: wrap;
 }
 
 .lesson-card{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    margin: 100px;
+    margin: 15px;
     height: 500px;
-    width: 500px;
+    width: 350px;
     border-radius: 12px;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-
+    padding: 10px;
 }
 
 .lesson-icon{
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    text-align: center;
-    width: 150px;
-    height: 150px;
-    background-color: #BF4C41;
-    border-radius: 100px;
     flex-direction: column;
-    margin-top: 20px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50%;
+    background-color: #BF4C41;
 }
 
 .lesson-icon i{
     font-size: 4em;
-    margin-top: 10px;
+    margin: 0;
 }
 
 .lesson-icon p{
     color: #fff;
-    font-size: 1.6em;
+    font-size: 2em;
     font-family: 'Josefin Sans', sans-serif;
+    margin-top: 10px;
 }
 
 .lesson-info{
     display: flex;
     flex-direction: column;
-    background-color: red;
     width: 100%;
     padding: 10px;
 }
 
 .card-button{
     border: none;
-    width: 340px;
+    width: 100%;
     height: 70px;
     background-color: #BF4C41;
     border-radius: 10px;
@@ -164,3 +156,11 @@ body {
     display: none;
 }
   
+
+.lessons-filter{
+    width: 90%;
+    background: #BF4C41;
+    height: 500px;
+    border-radius: 12px;
+
+}

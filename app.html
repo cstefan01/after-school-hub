@@ -26,9 +26,11 @@
                 </div>
            </div>
 
-           <div>
+
+           <div class="container-fluid bg-success d-flex justify-content-center align-items-center ">
             <input v-model="query" placeholder="Search for lessons">
-          </div>
+           </div>
+
 
            <div v-if="cart.show" class="cart-content d-flex justify-content-center align-items-center">
              
@@ -53,31 +55,46 @@
 
             </div>
            </div>
-           
-           <div v-else class="content">
-            
 
-            <div v-if="lessons.isOnFetchingError">
-                fetching error
+           <div v-else class="d-flex">
+            <div class="col-2 d-flex justify-content-center p-4">
+                <div class="lessons-filter">
+
+                </div>
+            
             </div>
 
-            <div v-else class="lesson-card" v-for="lesson in filteredLessons" :key="lesson.id">
-                <div class="lesson-icon">
-                    <i :class="lesson.icon"></i>
-                    <p>{{lesson.subject}}</p>
+            <div class="lessons-wrapper col-10">
+            
+                <div v-if="lessons.isOnFetchingError">
+                    fetching error
                 </div>
-
-                <div class="lesson-info">
-                    <span>Location: {{lesson.location}}</span>
-                    <span>Price: £{{lesson.price}}</span>
-                    <span>Available Spaces: {{lesson.spaces}} spaces left </span>
+    
+                <div v-else class="lesson-card" v-for="lesson in filteredLessons" :key="lesson.id">
+                    <div class="lesson-icon">
+                        <i :class="lesson.icon"></i>
+                        <p>{{lesson.subject}}</p>
+                    </div>
+    
+                    <div class="lesson-info">
+                        <span>Location: {{lesson.location}}</span>
+                        <span>Price: £{{lesson.price}}</span>
+                        <span>Available Spaces: {{lesson.spaces}} spaces left </span>
+                        <span>Date:</span>
+                        <span>Starts at:</span>
+                        <span>Ends at:</span>
+                    </div>
+                    
+                    <button class="card-button" @click = "addToCart(lesson)">Add to Cart</button>
+    
                 </div>
                 
-                <button class="card-button" @click = "addToCart(lesson)">Add to Cart</button>
+              </div>
+           </div>
 
-            </div>
-            
-          </div>
+           
+           
+           
      
         <!-- <div class="footer container-fluid">
             <div class="col-12">
