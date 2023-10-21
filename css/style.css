@@ -75,19 +75,21 @@ body {
 
 .lessons-wrapper {
     display: flex;
-    justify-content: center;
+    justify-content:start;
     align-items: center;
     flex: 1;
     flex-wrap: wrap;
+    background: #fddfdc;
 }
 
 .lesson-card{
     margin: 15px;
     height: 500px;
-    width: 350px;
+    width: 400px;
     border-radius: 12px;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     padding: 10px;
+    background: #fff;
 }
 
 .lesson-icon{
@@ -163,4 +165,34 @@ body {
     height: 500px;
     border-radius: 12px;
 
+}
+
+.checkout {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 200px;
+    height: 200px;
+    background: #fff;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.search-bar{
+    height: 70px;
+    padding: 10px;
+}
+
+.search-bar input{
+    height: 100%;
+    text-align: center;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+.search-bar input:focus{
+    outline: none;
 }

@@ -26,45 +26,51 @@
                 </div>
            </div>
 
-
-           <div class="container-fluid bg-success d-flex justify-content-center align-items-center ">
-            <input v-model="query" placeholder="Search for lessons">
-           </div>
-
-
-           <div v-if="cart.show" class="cart-content d-flex justify-content-center align-items-center">
+           <div v-if="cart.show" class="d-flex">
              
-            <div class="lesson-card"  v-if="cart.lessons.length !=0" v-for="lesson in cart.lessons" :key="lesson.id">
-                <div class="lesson-icon">
-                    <i :class="lesson.icon"></i>
-                    <p>{{lesson.subject}}</p>
+                <div class="lessons-wrapper col-8">
+                    <div class="lesson-card" v-if="cart.lessons.length !=0" v-for="lesson in cart.lessons" :key="lesson.id">
+                        <div class="lesson-icon">
+                            <i :class="lesson.icon"></i>
+                            <p>{{lesson.subject}}</p>
+                        </div>
+    
+                        <div class="lesson-info">
+                            <span>Location: {{lesson.location}}</span>
+                            <span>Price: £{{lesson.price}}</span>
+                            <span>Available Spaces: {{lesson.spaces}} spaces left </span>
+                        </div>
+                        
+                        <button class="card-button" @click = "removeFromCart(lesson)">Remove</button>
+                    </div>
                 </div>
 
-                <div class="lesson-info">
-                    <span>Location: {{lesson.location}}</span>
-                    <span>Price: £{{lesson.price}}</span>
-                    <span>Available Spaces: {{lesson.spaces}} spaces left </span>
+                <div class="col-4 bg-success">
+                    <div class="checkout w-100">
+                        <h2>Checkout</h2>
+                        <label>Name</label>
+                        <input type="text">
+                        <label>Phone</label>
+                        <input type="number">
+                        <button>Checkout</button>
+                    </div>
+                    
+
                 </div>
                 
-                <button class="card-button" @click = "removeFromCart(lesson)">Remove</button>
 
-            </div>
-
-            <div v-else>
-                cart is empty
-
-            </div>
-           </div>
-
-           <div v-else class="d-flex">
-            <div class="col-2 d-flex justify-content-center p-4">
-                <div class="lessons-filter">
+                <div v-else>
+                    cart is empty
 
                 </div>
-            
-            </div>
+           </div>
 
-            <div class="lessons-wrapper col-10">
+           <div v-else class="d-flex flex-column">
+            <div class="search-bar container-fluid d-flex justify-content-center align-items-center ">
+                <input v-model="query" placeholder="Search for lessons" class="col-6">
+            </div>
+        
+            <div class="lessons-wrapper col-12">
             
                 <div v-if="lessons.isOnFetchingError">
                     fetching error
