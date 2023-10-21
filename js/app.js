@@ -7,6 +7,10 @@ createApp({
             name: "After School Hub",
             copyright:{
                 year: 2023
+            },
+            search_engine:{
+                placeholder: "ssss",
+                query: ""
             }
            },
            cart:{
@@ -17,8 +21,7 @@ createApp({
            lessons: {
             lessons: [],
             isOnFetchingError: false,
-          },
-          query: '',
+          }
         }
     },
     methods:{
@@ -36,10 +39,23 @@ createApp({
         },
         addToCart(lesson){
             if(lesson.spaces != 0){
-                lesson.spaces -= 1
                 this.cart.lessons.push(lesson)
                 this.cart.counter = this.cart.lessons.length
+                lesson.spaces -= 1
+
+                lesson.button_text = "Successfully Added"
+
+                setTimeout(() =>{
+                    if(lesson.spaces == 0){
+                        lesson.button_text = "Out of Spaces"
+                    }else{
+                        lesson.button_text = "Add to cart"
+                    }  
+                }, 500);
+
+                
             }
+
            
         },
         removeFromCart(lesson){
@@ -57,8 +73,6 @@ createApp({
             const cartLength = this.cart.lessons.length
             if(cartLength >= 1){
                 this.cart.show = !this.cart.show
-            }else{
-                this.cart.show = false
             }
         }
     },
@@ -67,7 +81,7 @@ createApp({
     },
     computed: {
         filteredLessons() {
-            const queryWords = this.query.toLowerCase().split(' ')
+            const queryWords = this.site.search_engine.query.toLowerCase().split(' ')
 
             return this.lessons.lessons.filter(lesson => {
                 return queryWords.every(word => {
