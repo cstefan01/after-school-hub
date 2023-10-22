@@ -42,18 +42,13 @@ createApp({
                 this.cart.lessons.push(lesson)
                 this.cart.counter = this.cart.lessons.length
                 lesson.spaces -= 1
-
-                lesson.button_text = "Successfully Added"
-
-                setTimeout(() =>{
-                    if(lesson.spaces == 0){
-                        lesson.button_text = "Out of Spaces"
-                    }else{
-                        lesson.button_text = "Add to cart"
-                    }  
-                }, 500);
-
-                
+    
+                if(lesson.spaces == 0){
+                    lesson.button_text = "Out of Spaces"
+                }else{
+                    lesson.button_text = "Add to Cart"
+                }  
+            
             }
 
            

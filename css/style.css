@@ -113,6 +113,14 @@ body {
     border: solid white 2px;
 }
 
+.details{
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .price-tag{
     display: flex;
     justify-content: center;
@@ -142,7 +150,16 @@ body {
     color: #fff;
     font-size: 2em;
     font-family: 'Josefin Sans', sans-serif;
-    margin-top: 10px;
+}
+
+.lesson-icon img{
+    position: relative;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+    z-index: 1;
+
 }
 
 .lesson-info{

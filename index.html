@@ -75,11 +75,15 @@
     
                 <div v-else class="lesson-card" v-for="lesson in filteredLessons" :key="lesson.id">
                     <div class="lesson-icon">
-                        <i :class="lesson.icon"></i>
-                        <p>{{lesson.subject}}</p>
-                        <div class="spaces-tag">
-                            {{lesson.spaces}} spaces left
+                        <img :src="lesson.image.path" :alt="lesson.image.alt">
+                        <div class="details">
+                            <i :class="lesson.icon"></i>
+                            <p>{{lesson.subject}}</p>
+                            <div class="spaces-tag">
+                                {{lesson.spaces}} spaces left
+                            </div>
                         </div>
+                        
                     </div>
     
                     <div class="lesson-info">
@@ -92,8 +96,8 @@
 
                     <div class="price-tag">
                         £{{lesson.price}}
-
                     </div>
+                    
                      
                     
                     <button class="card-button" @click = "addToCart(lesson)">{{lesson.button_text}}</button>
