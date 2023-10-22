@@ -77,16 +77,24 @@
                     <div class="lesson-icon">
                         <i :class="lesson.icon"></i>
                         <p>{{lesson.subject}}</p>
+                        <div class="spaces-tag">
+                            {{lesson.spaces}} spaces left
+                        </div>
                     </div>
     
                     <div class="lesson-info">
-                        <span>Location: {{lesson.location}}</span>
-                        <span>Price: £{{lesson.price}}</span>
-                        <span>Available Spaces: {{lesson.spaces}} spaces left </span>
-                        <span>Date:</span>
-                        <span>Starts at:</span>
-                        <span>Ends at:</span>
+                        <h3>Lesson Info</h3>
+                        <span><b>Location:</b> {{lesson.location}}</span>
+                        <span><b>Date:</b> {{lesson.date}}</span>
+                        <span><b>Starts at:</b> {{lesson.starts_at}}</span>
+                        <span><b>Ends at:</b> {{lesson.ends_at}}</span>
                     </div>
+
+                    <div class="price-tag">
+                        £{{lesson.price}}
+
+                    </div>
+                     
                     
                     <button class="card-button" @click = "addToCart(lesson)">{{lesson.button_text}}</button>
                 </div>

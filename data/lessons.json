@@ -1,122 +1,124 @@
 {
-    "lessons": [
-      {
-        "id": 1,
-        "icon": "fa-solid fa-calculator",
-        "subject": "Maths",
-        "location": "London",
-        "price": 100,
-        "spaces": 5,
-        "button_text": "Add to Cart"
-      },
-      {
-        "id": 2,
-        "icon": "fa-solid fa-calculator",
-        "subject": "Maths",
-        "location": "Oxford",
-        "price": 100,
-        "spaces": 5,
-        "button_text": "Add to Cart"
-      },
-      {
-        "id": 3,
-        "icon": "fa-solid fa-spell-check",
-        "subject": "English",
-        "location": "London",
-        "price": 50,
-        "spaces": 5,
-        "button_text": "Add to Cart"
-      },
-      {
-        "id": 4,
-        "icon": "fa-solid fa-music",
-        "subject": "Music",
-        "location": "Romania",
-        "price": 430,
-        "spaces": 5,
-        "button_text": "Add to Cart"
-      },
-      {
-        "id": 5,
-        "icon": "fa-solid fa-music",
-        "subject": "Music",
-        "location": "Romania",
-        "price": 430,
-        "spaces": 5,
-        "button_text": "Add to Cart"
-      },
-      {
-        "id": 6,
-        "icon": "fa-solid fa-music",
-        "subject": "Music",
-        "location": "Romania",
-        "price": 430,
-        "spaces": 5,
-        "button_text": "Add to Cart"
-      },
-      {
-        "id": 7,
-        "icon": "fa-solid fa-music",
-        "subject": "Music",
-        "location": "Romania",
-        "price": 430,
-        "spaces": 5,
-        "button_text": "Add to Cart"
-      },
-      {
-        "id": 8,
-        "icon": "fa-solid fa-music",
-        "subject": "Music",
-        "location": "Romania",
-        "price": 430,
-        "spaces": 5,
-        "button_text": "Add to Cart"
-      },
-      {
-        "id": 9,
-        "icon": "fa-solid fa-music",
-        "subject": "Music",
-        "location": "Romania",
-        "price": 430,
-        "spaces": 5,
-        "button_text": "Add to Cart"
-      },
-      {
-        "id": 10,
-        "icon": "fa-solid fa-music",
-        "subject": "Programming",
-        "location": "Middlesex",
-        "price": 430,
-        "spaces": 5,
-        "button_text": "Add to Cart"
-      },
-      {
-        "id": 11,
-        "icon": "fa-solid fa-music",
-        "subject": "Programming",
-        "location": "Dubai",
-        "price": 430,
-        "spaces": 5,
-        "button_text": "Add to Cart"
-      },
-      {
-        "id": 11,
-        "icon": "fa-solid fa-music",
-        "subject": "Programming",
-        "location": "Dubai",
-        "price": 430,
-        "spaces": 5,
-        "button_text": "Add to Cart"
-      },
-      {
-        "id": 11,
-        "icon": "fa-solid fa-music",
-        "subject": "Programming",
-        "location": "Dubai",
-        "price": 430,
-        "spaces": 5,
-        "button_text": "Add to Cart"
-      }
-    ]
-  }
-  
+  "lessons": [
+    {
+      "id": 1,
+      "icon": "fa-solid fa-calculator",
+      "subject": "Maths",
+      "location": "London",
+      "price": 100,
+      "spaces": 5,
+      "date": "22/10/2023",
+      "starts_at": "16:00PM",
+      "ends_at": "20:00PM",
+      "button_text": "Add to Cart"
+    },
+    {
+      "id": 2,
+      "icon": "fa-solid fa-flask",
+      "subject": "Chemistry",
+      "location": "New York",
+      "price": 90,
+      "spaces": 3,
+      "date": "23/10/2023",
+      "starts_at": "15:30PM",
+      "ends_at": "18:30PM",
+      "button_text": "Add to Cart"
+    },
+    {
+      "id": 3,
+      "icon": "fa-solid fa-language",
+      "subject": "Language Learning",
+      "location": "Paris",
+      "price": 110,
+      "spaces": 6,
+      "date": "25/10/2023",
+      "starts_at": "14:00PM",
+      "ends_at": "17:00PM",
+      "button_text": "Add to Cart"
+    },
+    {
+      "id": 4,
+      "icon": "fa-solid fa-history",
+      "subject": "History",
+      "location": "Rome",
+      "price": 85,
+      "spaces": 4,
+      "date": "27/10/2023",
+      "starts_at": "16:30PM",
+      "ends_at": "19:30PM",
+      "button_text": "Add to Cart"
+    },
+    {
+      "id": 5,
+      "icon": "fa-solid fa-music",
+      "subject": "Music Theory",
+      "location": "Los Angeles",
+      "price": 120,
+      "spaces": 5,
+      "date": "28/10/2023",
+      "starts_at": "18:00PM",
+      "ends_at": "21:00PM",
+      "button_text": "Add to Cart"
+    },
+    {
+      "id": 6,
+      "icon": "fa-solid fa-globe",
+      "subject": "Geography",
+      "location": "Sydney",
+      "price": 95,
+      "spaces": 4,
+      "date": "30/10/2023",
+      "starts_at": "14:30PM",
+      "ends_at": "17:30PM",
+      "button_text": "Add to Cart"
+    },
+    {
+      "id": 7,
+      "icon": "fa-solid fa-code",
+      "subject": "Programming",
+      "location": "San Francisco",
+      "price": 130,
+      "spaces": 8,
+      "date": "01/11/2023",
+      "starts_at": "15:00PM",
+      "ends_at": "19:00PM",
+      "button_text": "Add to Cart"
+    },
+    {
+      "id": 8,
+      "icon": "fa-solid fa-paint-brush",
+      "subject": "Art",
+      "location": "Berlin",
+      "price": 75,
+      "spaces": 5,
+      "date": "03/11/2023",
+      "starts_at": "17:00PM",
+      "ends_at": "20:00PM",
+      "button_text": "Add to Cart"
+    },
+    {
+      "id": 9,
+      "icon": "fa-solid fa-running",
+      "subject": "Physical Education",
+      "location": "Tokyo",
+      "price": 85,
+      "spaces": 6,
+      "date": "05/11/2023",
+      "starts_at": "10:00AM",
+      "ends_at": "12:00PM",
+      "button_text": "Add to Cart"
+    },
+    {
+      "id": 10,
+      "icon": "fa-solid fa-book-open",
+      "subject": "Literature",
+      "location": "New Delhi",
+      "price": 95,
+      "spaces": 4,
+      "date": "07/11/2023",
+      "starts_at": "19:30PM",
+      "ends_at": "22:30PM",
+      "button_text": "Add to Cart"
+    }
+  ]
+}
