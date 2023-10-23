@@ -1,78 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>After School Hub</title>
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/dc398583c6.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
 </head>
+
 <body>
     <div id="app" v-cloak>
-            <div class="navbar container-fluid p-0">
-                <div class="site-name col-6 p-4 h-100">
-                    <i class="fa-solid fa-school"></i>
-                    <h1>{{site.name}}</h1>
-                </div>
-                <div class="navigation col-6 h-100 p-3">
-                    <div class="cart" @click="toggleCart">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <div class="counter">
-                            {{cart.counter}}
-                        </div>
-                    </div>
-                    
-                </div>
-           </div>
-
-
-           <!-- Start of Cart Page -->
-           <div v-if="cart.show" class="d-flex">
-                <div class="lessons-wrapper col-8">
-                    <div class="lesson-card" v-if="cart.lessons.length !=0" v-for="lesson in cart.lessons" :key="lesson.id">
-                        <div class="lesson-icon">
-                            <i :class="lesson.icon"></i>
-                            <p>{{lesson.subject}}</p>
-                        </div>
-    
-                        <div class="lesson-info">
-                            <span>Location: {{lesson.location}}</span>
-                            <span>Price: £{{lesson.price}}</span>
-                            <span>Available Spaces: {{lesson.spaces}} spaces left </span>
-                        </div>
-                        
-                        <button class="card-button" @click = "removeFromCart(lesson)">Remove</button>
+        <div class="navbar container-fluid p-0">
+            <div class="site-name col-6 p-4 h-100">
+                <i class="fa-solid fa-school"></i>
+                <h1>{{site.name}}</h1>
+            </div>
+            <div class="navigation col-6 h-100 p-3">
+                <div class="cart" @click="toggleCart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <div class="counter">
+                        {{cart.counter}}
                     </div>
                 </div>
 
-                <div class="col-4 bg-success">
-                    <div class="checkout w-100">
-                        <h2>Checkout</h2>
-                        <label>Name</label>
-                        <input type="text">
-                        <label>Phone</label>
-                        <input type="number">
-                        <button>Checkout</button>
+            </div>
+        </div>
+
+
+        <!-- Start of Cart Page -->
+        <div v-if="cart.show" class="d-flex container-fluid justify-content-center align-items-center">
+            <div class="cart-card col-8">
+                <div class="col-8 shopping-cart h-100">
+                    <h2>Shopping Cart</h2>
+                    <hr>
+
+                    <div v-if="!isCartEmpty()" class="list-of-lessons">
+                        <ul>
+                            <li v-for="lesson in cart.lessons" :key="lesson.id">
+                                <div class="col-2 bg-warning h-100 d-flex justify-content-center align-items-center">
+                                    <i :class="lesson.icon"></i>
+                                </div>
+
+                                <div class="col-4 bg-danger h-100 d-flex justify-content-center align-items-center">
+                                    {{lesson.subject}}
+                                </div>
+
+                                <div class="col-3 bg-warning h-100 d-flex justify-content-center align-items-center">
+                                    £ {{lesson.price}}
+                                </div>
+
+                                <div
+                                    class="col-3 bg-danger h-100 d-flex justify-content-center align-items-center text-center ">
+                                    <i class="remove-icon fa-solid fa-xmark" @click="removeFromCart(lesson)"></i>
+                                </div>
+
+                            </li>
+                        </ul>
+
+                        <div class="continue-shopping">
+                            Continue Shopping
+                            i
+                        </div>
                     </div>
-                    
 
+                    <div class="no-cart-items-error" v-else>
+                        <div class="message">
+                            <i class="fa-solid fa-shop"></i>
+                            No items in the Cart
+                        </div>
+                        <button>Back to Shopping</button>
+                    </div>
                 </div>
-           </div>
-           <!-- End of Cart Page -->
 
-           <!-- Start of Lessons Page -->
-           <div v-else class="d-flex flex-column">
+
+            </div>
+
+
+
+        </div>
+        <!-- End of Cart Page -->
+
+        <!-- Start of Lessons Page -->
+        <div v-else>
             <div class="search-bar container-fluid d-flex justify-content-center align-items-center ">
                 <input v-model="site.search_engine.query" placeholder="Search for lessons" class="col-6">
             </div>
-        
-            <div class="lessons-wrapper col-12">
-            
+
+            <div class="lessons-wrapper container-fluid">
+
                 <div v-if="lessons.isOnFetchingError">
                     fetching error
                 </div>
-    
+
                 <div v-else class="lesson-card" v-for="lesson in filteredLessons" :key="lesson.id">
                     <div class="lesson-icon">
                         <img :src="lesson.image.path" :alt="lesson.image.alt">
@@ -83,9 +106,9 @@
                                 {{lesson.spaces}} spaces left
                             </div>
                         </div>
-                        
+
                     </div>
-    
+
                     <div class="lesson-info">
                         <h3>Lesson Info</h3>
                         <span><b>Location:</b> {{lesson.location}}</span>
@@ -97,23 +120,111 @@
                     <div class="price-tag">
                         £{{lesson.price}}
                     </div>
-                    
-                     
-                    
-                    <button class="card-button" @click = "addToCart(lesson)">{{lesson.button_text}}</button>
-                </div>
-                
-              </div>
-           </div>
-           <!-- End of Lessons Page -->
 
-           
+                    <button class="card-button" @click="addToCart(lesson)">{{lesson.button_text}}</button>
+                </div>
+
+            </div>
+        </div>
+        <!-- End of Lessons Page -->
+
+
         <div class="copyright container-fluid">
-         <span>Copyright &copy; {{site.copyright.year}}, {{site.name}} | All Rights Reserved.</span>
+            <span>Copyright &copy; {{site.copyright.year}}, {{site.name}} | All Rights Reserved.</span>
         </div>
 
     </div>
 
-    <script type="module" src="./js/app.js"></script>
+    <script>
+        let app = new Vue({
+            el: "#app",
+            data: {
+                site: {
+                    name: "After School Hub",
+                    copyright: {
+                        year: 2023
+                    },
+                    search_engine: {
+                        placeholder: "ssss",
+                        query: ""
+                    }
+                },
+                cart: {
+                    counter: 0,
+                    lessons: [],
+                    show: false
+                },
+                lessons: {
+                    lessons: [],
+                    isOnFetchingError: false,
+                }
+            },
+            methods: {
+                fetchLessons() {
+                    fetch('./data/lessons.json')
+                        .then(response => {
+                            if (!response.ok) {
+                                this.lessons.isOnFetchingError = true
+                            }
+                            return response.json()
+                        })
+                        .then(data => {
+                            this.lessons = data
+                        })
+                },
+                addToCart(lesson) {
+                    if (lesson.spaces != 0) {
+                        this.cart.lessons.push(lesson)
+                        this.cart.counter = this.cart.lessons.length
+                        lesson.spaces -= 1
+
+                        if (lesson.spaces == 0) {
+                            lesson.button_text = "Out of Spaces"
+                        } else {
+                            lesson.button_text = "Add to Cart"
+                        }
+
+                    }
+
+                },
+                removeFromCart(lesson) {
+                    for (let l of this.cart.lessons) {
+                        if (JSON.stringify(l) === JSON.stringify(lesson)) {
+                            this.cart.lessons.pop(l)
+                            this.cart.counter = this.cart.lessons.length
+                            l.spaces += 1;
+                            break
+                        }
+                    }
+
+                },
+                toggleCart() {
+                    const cartLength = this.cart.lessons.length
+                    if (cartLength >= 1) {
+                        this.cart.show = !this.cart.show
+                    }
+                },
+                isCartEmpty() {
+                    return this.cart.lessons.length == 0;
+                }
+            },
+            mounted() {
+                this.fetchLessons();
+            },
+            computed: {
+                filteredLessons() {
+                    const queryWords = this.site.search_engine.query.toLowerCase().split(' ')
+
+                    return this.lessons.lessons.filter(lesson => {
+                        return queryWords.every(word => {
+                            return lesson.subject.toLowerCase().includes(word) || lesson.location.toLowerCase().includes(word)
+                        })
+                    })
+                }
+            }
+        })
+    </script>
+
 </body>
+
 </html>
