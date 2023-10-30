@@ -25,8 +25,6 @@ body {
 .navbar{
     height: 60px;
     background: #BF4C41;
-    position: absolute;
-    top:0;
 }
 
 .navbar .site-name{
@@ -74,13 +72,14 @@ body {
 
 /* Start of Content */
 
-.lessons-wrapper {
+.wrapper {
     display: flex;
     flex: 1;
     flex-wrap: wrap;
     background: #fddfdc;
     justify-content: center;
     align-items: center start;
+    height: 100vh;
 }
 
 .lesson-card{
@@ -185,7 +184,6 @@ body {
 }
 /* End of Content /*
 
-
 /* Start of Footer */
 
 .footer{
@@ -215,20 +213,32 @@ body {
     background: #BF4C41;
     height: 500px;
     border-radius: 12px;
-
 }
 
 .checkout {
     display: flex;
-    align-items: center;
     flex-direction: column;
-    justify-content: center;
-    width: 200px;
-    height: 200px;
     background: #fff;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-    padding: 20px;
-    border-radius: 12px;
+    padding: 10px;
+    border-radius: 0px 12px 12px 0px;
+}
+
+.checkout-button{
+    border: none;
+    text-transform: uppercase;
+    color: #fff;
+    background: #000;
+    width: 100%;
+    border-radius: 30px;
+    padding: 15px;
+    font-weight: bold;
+    position: relative;
+    top: 240px;
+}
+
+.dual-entry input{
+    width: 48%;
 }
 
 .search-bar{
@@ -342,7 +352,42 @@ body {
     margin-bottom: 10px;
 }
 
+.continue-shopping{
+    color: #1e1e1e;
+    font-weight: bold;
+}
 
+.continue-shopping i{
+    font-size: 1.2em;
+    color: #1e1e1e;
+}
+
+.continue-shopping:hover i,
+.continue-shopping:hover span {
+  color: #BF4C41;
+  cursor: pointer;
+}
+
+.cart-total{
+    color: #1e1e1e;
+    font-size: 1.2em;
+}
+
+
+.entry input{
+    text-align: center;
+    border: solid rgb(160, 160, 160) 1px;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+
+.prompt{
+    color: rgb(231, 34, 34);
+    text-align: center;
+    width: 100%;
+}
 /* Start of Animations */
 
 @-webkit-keyframes fade-in {

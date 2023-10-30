@@ -30,68 +30,13 @@
             </div>
         </div>
 
-
-        <!-- Start of Cart Page -->
-        <div v-if="cart.show" class="d-flex container-fluid justify-content-center align-items-center">
-            <div class="cart-card col-8">
-                <div class="col-8 shopping-cart h-100">
-                    <h2>Shopping Cart</h2>
-                    <hr>
-
-                    <div v-if="!isCartEmpty()" class="list-of-lessons">
-                        <ul>
-                            <li v-for="lesson in cart.lessons" :key="lesson.id">
-                                <div class="col-2 bg-warning h-100 d-flex justify-content-center align-items-center">
-                                    <i :class="lesson.icon"></i>
-                                </div>
-
-                                <div class="col-4 bg-danger h-100 d-flex justify-content-center align-items-center">
-                                    {{lesson.subject}}
-                                </div>
-
-                                <div class="col-3 bg-warning h-100 d-flex justify-content-center align-items-center">
-                                    £ {{lesson.price}}
-                                </div>
-
-                                <div
-                                    class="col-3 bg-danger h-100 d-flex justify-content-center align-items-center text-center ">
-                                    <i class="remove-icon fa-solid fa-xmark" @click="removeFromCart(lesson)"></i>
-                                </div>
-
-                            </li>
-                        </ul>
-
-                        <div class="continue-shopping">
-                            Continue Shopping
-                            i
-                        </div>
-                    </div>
-
-                    <div class="no-cart-items-error" v-else>
-                        <div class="message">
-                            <i class="fa-solid fa-shop"></i>
-                            No items in the Cart
-                        </div>
-                        <button>Back to Shopping</button>
-                    </div>
-                </div>
-
-
-            </div>
-
-
-
-        </div>
-        <!-- End of Cart Page -->
-
         <!-- Start of Lessons Page -->
-        <div v-else>
-            <div class="search-bar container-fluid d-flex justify-content-center align-items-center ">
-                <input v-model="site.search_engine.query" placeholder="Search for lessons" class="col-6">
+        <div v-if="pages.lessons_page">
+            <div class="search-bar container-fluid d-flex justify-content-center align-items-center">
+                <input v-model="site.search_engine.query" :placeholder="site.search_engine.placeholder" class="col-6">
             </div>
 
-            <div class="lessons-wrapper container-fluid">
-
+            <div class="wrapper container-fluid">
                 <div v-if="lessons.isOnFetchingError">
                     fetching error
                 </div>
@@ -106,7 +51,6 @@
                                 {{lesson.spaces}} spaces left
                             </div>
                         </div>
-
                     </div>
 
                     <div class="lesson-info">
@@ -128,9 +72,95 @@
         </div>
         <!-- End of Lessons Page -->
 
+        <!-- Start of Cart Page -->
+        <div v-else-if="pages.cart_page" class="wrapper">
+            <div class="cart-card col-8 row">
+                <div class="col-8 shopping-cart h-100">
+
+                    <div v-if="!isCartEmpty(cart.lessons.length)" class="h-75 w-100">
+                        <h2>Shopping Cart</h2>
+                        <hr>
+                        <div class="list-of-lessons">
+                            <ul>
+                                <li v-for="(lesson, index) in cart.lessons" :key="index">
+                                    <div class="col-2 h-100 d-flex justify-content-center align-items-center">
+                                        <i :class="lesson.icon"></i>
+                                    </div>
+
+                                    <div class="col-4 h-100 d-flex justify-content-center align-items-center">
+                                        {{lesson.subject}}
+                                    </div>
+
+                                    <div class="col-3 h-100 d-flex justify-content-center align-items-center">
+                                        £ {{lesson.price}}
+                                    </div>
+
+                                    <div
+                                        class="col-3 h-100 d-flex justify-content-center align-items-center text-center ">
+                                        <i class="remove-icon fa-solid fa-trash" @click="removeFromCart(lesson)"></i>
+                                    </div>
+
+                                </li>
+                            </ul>
+
+                        </div>
+
+                        <hr>
+
+                        <div class="w-100 h-25">
+                           
+                            <div class="continue-shopping float-start col-6" @click="backToShopping">
+                                <span>Continue Shopping</span>
+                                <i class="fa-solid fa-store"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="no-cart-items-error" v-else>
+                        <div class="message">
+                            <i class="fa-solid fa-shop"></i>
+                            No items in the Cart
+                        </div>
+                        <button @click="backToShopping">Back to Shopping</button>
+                    </div>
+                </div>
+
+                <div class="checkout col-4">
+                    <div class="w-100 bg-success d-flex align-items-center">
+                        <h3>Checkout</h3>
+                        <h6>Items: {{getCartSize()}}</h6>
+                    </div>
+                    
+                    <hr>
+
+                    <div class="entry dual-entry d-flex w-100">
+                        <input type="text" placeholder="First Name" v-model="checkout.fields.first_name">
+                        <input type="text" placeholder="Last Name" v-model="checkout.fields.last_name">
+                    </div>
+
+                    <div class="entry d-flex flex-column">
+                        <input type="text" placeholder="Email Address" v-model="checkout.fields.email_address">
+                        <input type="text" placeholder="Phone" v-model="checkout.fields.phone">
+                    </div>
+
+                    <hr>
+
+                    <div class="cart-total d-flex flex-column p-2 w-100 float-start">
+                        <span>Sub-Total:</span>
+                        <span>Tax: </span>
+                        <span>Total: £{{computedCartTotal}}</span>  
+                    </div>
+
+                    <button class="checkout-button" @click="submitCheckoutForm">checkout</button>
+                    <span class="prompt" v-if="prompt.show">{{prompt.message}}</span>
+
+                </div>
+            </div>
+        </div>
+        <!-- End of Cart Page -->
 
         <div class="copyright container-fluid">
-            <span>Copyright &copy; {{site.copyright.year}}, {{site.name}} | All Rights Reserved.</span>
+            <span>Copyright &copy; {{copyright.year}}, {{site_name}} | All Rights Reserved.</span>
         </div>
 
     </div>
@@ -139,24 +169,39 @@
         let app = new Vue({
             el: "#app",
             data: {
+                site_name: "After School Hub",
                 site: {
-                    name: "After School Hub",
-                    copyright: {
-                        year: 2023
-                    },
                     search_engine: {
-                        placeholder: "ssss",
+                        placeholder: "Search for lessons",
                         query: ""
                     }
+                },
+                copyright: {
+                    year: 2023
                 },
                 cart: {
                     counter: 0,
                     lessons: [],
-                    show: false
                 },
                 lessons: {
                     lessons: [],
                     isOnFetchingError: false,
+                },
+                pages:{
+                    lessons_page: false,
+                    cart_page: false
+                },
+                checkout:{
+                    fields:{
+                        first_name: "",
+                        last_name: "",
+                        email_address: "",
+                        phone: ""
+                    }
+                },
+                prompt:{
+                    message: "",
+                    show: false
                 }
             },
             methods: {
@@ -174,55 +219,106 @@
                 },
                 addToCart(lesson) {
                     if (lesson.spaces != 0) {
-                        this.cart.lessons.push(lesson)
-                        this.cart.counter = this.cart.lessons.length
-                        lesson.spaces -= 1
+                        this.cart.lessons.push(lesson);
+                        this.cart.counter = this.cart.lessons.length;
+                        lesson.spaces -= 1;
 
                         if (lesson.spaces == 0) {
-                            lesson.button_text = "Out of Spaces"
+                            lesson.button_text = "Out of Spaces";
                         } else {
-                            lesson.button_text = "Add to Cart"
+                            lesson.button_text = "Add to Cart";
                         }
-
                     }
 
                 },
                 removeFromCart(lesson) {
                     for (let l of this.cart.lessons) {
                         if (JSON.stringify(l) === JSON.stringify(lesson)) {
-                            this.cart.lessons.pop(l)
-                            this.cart.counter = this.cart.lessons.length
+                            this.cart.lessons.pop(l);
+                            this.cart.counter = this.cart.lessons.length;
                             l.spaces += 1;
                             break
                         }
                     }
-
                 },
                 toggleCart() {
-                    const cartLength = this.cart.lessons.length
+                    const cartLength = this.cart.lessons.length;
                     if (cartLength >= 1) {
-                        this.cart.show = !this.cart.show
+                        this.pages.cart_page = !this.pages.cart_page;
+                        this.pages.lessons_page = !this.pages.lessons_page;
                     }
                 },
-                isCartEmpty() {
-                    return this.cart.lessons.length == 0;
-                }
+                backToShopping(){
+                    this.pages.cart_page = false;
+                    this.pages.lessons_page = true;
+                },
+                isFormEmpty(){
+                    let isFormEmpty = false;
+                    Array.from(arguments).forEach(function (value) {
+                        if (value === '') {
+                            isFormEmpty = true; 
+                        }
+                    });
+
+                    return isFormEmpty;
+                },
+                isCartEmpty(cartLength) {
+                    return cartLength == 0;
+                },
+                getCartSize(){
+                    return this.cart.lessons.length;
+                },
+                isEmailAddressValid(email){
+                    const validEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                    return validEmail.test(email);
+                },
+                isPhoneValid(phone){
+                    const validPhone = /^07\d{9}$/ ;
+                    return validPhone.test(phone);
+                },
+                submitCheckoutForm(){
+                    const first_name = this.checkout.fields.first_name;
+                    const last_name = this.checkout.fields.last_name;
+                    const email_address = this.checkout.fields.email_address;
+                    const phone = this.checkout.fields.phone;
+                    const cart_length = this.cart.lessons.length;
+
+                    const isEmailAddressValid = this.isEmailAddressValid(email_address);
+                    const isPhoneValid = this.isPhoneValid(phone);
+                    const isCartEmpty = this.isCartEmpty(cart_length);
+                    const isFormEmpty = this.isFormEmpty(first_name,last_name,email_address,phone);
+
+                    if(!isFormEmpty && !isCartEmpty && isPhoneValid && isEmailAddressValid){
+                        alert("submitted")
+                    }else{
+
+                    }
+                },
             },
             mounted() {
+                this.pages.lessons_page = true;
                 this.fetchLessons();
+                
             },
             computed: {
                 filteredLessons() {
-                    const queryWords = this.site.search_engine.query.toLowerCase().split(' ')
+                    const queryWords = this.site.search_engine.query.toLowerCase().split(' ');
 
                     return this.lessons.lessons.filter(lesson => {
                         return queryWords.every(word => {
-                            return lesson.subject.toLowerCase().includes(word) || lesson.location.toLowerCase().includes(word)
-                        })
-                    })
+                            return lesson.subject.toLowerCase().includes(word) || lesson.location.toLowerCase().includes(word);
+                        });
+                    });
+                },
+                computedCartTotal(){
+                    let cartTotal = 0;
+                    for(let lesson of this.cart.lessons){
+                        cartTotal += lesson.price ;
+                    }
+                    return cartTotal;
                 }
             }
-        })
+        });
     </script>
 
 </body>
