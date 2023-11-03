@@ -15,7 +15,13 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    min-width: 100vw;
     animation: fade-in 1s ease-in-out;
+}
+
+#app{
+    height: 100vh;
+    width: 100vw;
 }
 
 /* End of generic styling */
@@ -79,7 +85,6 @@ body {
     background: #fddfdc;
     justify-content: center;
     align-items: center start;
-    height: 100vh;
 }
 
 .lesson-card{
@@ -226,7 +231,7 @@ body {
 
 .checkout-button{
     border: none;
-    text-transform: uppercase;
+    text-transform: capitalize;
     color: #fff;
     background: #000;
     width: 100%;
@@ -368,10 +373,15 @@ body {
   cursor: pointer;
 }
 
-.cart-total{
+.cart-total {
     color: #1e1e1e;
     font-size: 1.2em;
+    background-color: red;
+    display: flex;
+    align-items: end;
 }
+
+
 
 
 .entry input{
@@ -388,6 +398,15 @@ body {
     text-align: center;
     width: 100%;
 }
+
+
+.checkout-headline{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
 /* Start of Animations */
 
 @-webkit-keyframes fade-in {

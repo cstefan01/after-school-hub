@@ -17,14 +17,12 @@
         <div class="navbar container-fluid p-0">
             <div class="site-name col-6 p-4 h-100">
                 <i class="fa-solid fa-school"></i>
-                <h1>{{site.name}}</h1>
+                <h1 v-text="site_name"></h1>
             </div>
             <div class="navigation col-6 h-100 p-3">
-                <div class="cart" @click="toggleCart">
+                <div class="cart" v-on:click="toggleCart">
                     <i class="fa-solid fa-cart-shopping"></i>
-                    <div class="counter">
-                        {{cart.counter}}
-                    </div>
+                    <div class="counter" v-text="cart.counter"></div>
                 </div>
 
             </div>
@@ -65,7 +63,7 @@
                         £{{lesson.price}}
                     </div>
 
-                    <button class="card-button" @click="addToCart(lesson)">{{lesson.button_text}}</button>
+                    <button class="card-button" v-on:click="addToCart(lesson)">{{lesson.button_text}}</button>
                 </div>
 
             </div>
@@ -87,17 +85,14 @@
                                         <i :class="lesson.icon"></i>
                                     </div>
 
-                                    <div class="col-4 h-100 d-flex justify-content-center align-items-center">
-                                        {{lesson.subject}}
-                                    </div>
+                                    <div class="col-4 h-100 d-flex justify-content-center align-items-center" v-text="lesson.subject"></div>
 
                                     <div class="col-3 h-100 d-flex justify-content-center align-items-center">
                                         £ {{lesson.price}}
                                     </div>
 
-                                    <div
-                                        class="col-3 h-100 d-flex justify-content-center align-items-center text-center ">
-                                        <i class="remove-icon fa-solid fa-trash" @click="removeFromCart(lesson)"></i>
+                                    <div class="col-3 h-100 d-flex justify-content-center align-items-center text-center ">
+                                        <i class="remove-icon fa-solid fa-trash" v-on:click="removeFromCart(lesson)"></i>
                                     </div>
 
                                 </li>
@@ -109,7 +104,7 @@
 
                         <div class="w-100 h-25">
                            
-                            <div class="continue-shopping float-start col-6" @click="backToShopping">
+                            <div class="continue-shopping float-start col-6" v-on:click="backToShopping">
                                 <span>Continue Shopping</span>
                                 <i class="fa-solid fa-store"></i>
                             </div>
@@ -121,16 +116,16 @@
                             <i class="fa-solid fa-shop"></i>
                             No items in the Cart
                         </div>
-                        <button @click="backToShopping">Back to Shopping</button>
+                        <button v-on:click="backToShopping">Back to Shopping</button>
                     </div>
                 </div>
 
                 <div class="checkout col-4">
-                    <div class="w-100 bg-success d-flex align-items-center">
+                    <div class="checkout-headline">
                         <h3>Checkout</h3>
                         <h6>Items: {{getCartSize()}}</h6>
                     </div>
-                    
+
                     <hr>
 
                     <div class="entry dual-entry d-flex w-100">
@@ -146,12 +141,12 @@
                     <hr>
 
                     <div class="cart-total d-flex flex-column p-2 w-100 float-start">
-                        <span>Sub-Total:</span>
-                        <span>Tax: </span>
-                        <span>Total: £{{computedCartTotal}}</span>  
+                        <span>Sub-Total: £<span v-text="computedCart_SubTotal"></span></span>
+                        <span>Tax: <span v-text="checkout.tax"></span>%</span>
+                        <span>Total: £<span v-text="computedCart_Total"></span></span> 
                     </div>
 
-                    <button class="checkout-button" @click="submitCheckoutForm">checkout</button>
+                    <button class="checkout-button" v-on:click="submitCheckoutForm">pay £{{computedCart_Total}}</button>
                     <span class="prompt" v-if="prompt.show">{{prompt.message}}</span>
 
                 </div>
@@ -197,7 +192,8 @@
                         last_name: "",
                         email_address: "",
                         phone: ""
-                    }
+                    },
+                    tax: 0
                 },
                 prompt:{
                     message: "",
@@ -289,16 +285,31 @@
                     const isFormEmpty = this.isFormEmpty(first_name,last_name,email_address,phone);
 
                     if(!isFormEmpty && !isCartEmpty && isPhoneValid && isEmailAddressValid){
-                        alert("submitted")
-                    }else{
-
+                        alert("submitted");
+                        this.resetCart();
+                        this.setPrompt("", false);
+                    }else if(isFormEmpty){
+                        this.setPrompt("missing fields - please fill out the missing fields",true);
+                    }else if(isCartEmpty){
+                        this.setPrompt("no cart items - cart is empty",true);
+                    }else if(!isPhoneValid){
+                        this.setPrompt("invalid phone number - enter correct number",true);
+                    }else if(!isEmailAddressValid){
+                        this.setPrompt("invalid email address - enter correct email address",true);
                     }
                 },
+                setPrompt(message,show){
+                    this.prompt.message = message;
+                    this.prompt.show = show;
+                },
+                resetCart(){
+                    this.cart.lessons = [];
+                    this.cart.counter = 0;
+                }
             },
             mounted() {
                 this.pages.lessons_page = true;
                 this.fetchLessons();
-                
             },
             computed: {
                 filteredLessons() {
@@ -310,12 +321,16 @@
                         });
                     });
                 },
-                computedCartTotal(){
+                computedCart_SubTotal(){
                     let cartTotal = 0;
                     for(let lesson of this.cart.lessons){
-                        cartTotal += lesson.price ;
+                        cartTotal += lesson.price;
                     }
                     return cartTotal;
+                },
+                computedCart_Total(){
+                    let tax_added = this.computedCart_SubTotal * (this.checkout.tax / 100);
+                    return  this.computedCart_SubTotal + tax_added;
                 }
             }
         });
