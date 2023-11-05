@@ -1,5 +1,3 @@
-
-
 /* Start of external fonts */
 
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
@@ -12,16 +10,16 @@
 body {
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    min-width: 100vw;
     animation: fade-in 1s ease-in-out;
+    width: 99vw;
+    height: 100vh;
 }
 
 #app{
+    display: flex;
+    flex-direction: column;
+    width: 99vw;
     height: 100vh;
-    width: 100vw;
 }
 
 /* End of generic styling */
@@ -84,7 +82,16 @@ body {
     flex-wrap: wrap;
     background: #fddfdc;
     justify-content: center;
-    align-items: center start;
+    align-items: center;
+}
+
+.cart-wrapper {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    background: #fddfdc;
+    justify-content: center;
+    align-items: center;
 }
 
 .lesson-card{
@@ -106,6 +113,25 @@ body {
     height: 50%;
     background-color: #BF4C41;
 }
+
+.lesson-image{
+    padding: 12px;
+}
+
+.lesson-image img{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 0;
+}
+
+.lesson-image i {
+    position: absolute;
+    z-index: 1;
+    color: #ffffff;
+    
+}
+
 
 .spaces-tag{
     background: #BF4C41;
@@ -310,13 +336,12 @@ body {
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 }
 
-.shopping-cart ul li i{
-    font-size: 1.5em;
-    color: #000;
-}
+
 
 .remove-icon{
     cursor: pointer;
+    color: #000;
+    font-size: 1.5em;
 }
 
 .no-cart-items-error{
@@ -375,14 +400,15 @@ body {
 
 .cart-total {
     color: #1e1e1e;
-    font-size: 1.2em;
+    font-size: 1.4em;
     background-color: red;
     display: flex;
     align-items: end;
 }
 
-
-
+.cart-total span{
+    margin-right: 10px;
+}
 
 .entry input{
     text-align: center;
