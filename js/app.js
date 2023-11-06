@@ -30,12 +30,16 @@ let app = new Vue({
                 email_address: "",
                 phone: ""
             },
-            tax: 0
+            tax: 0,
+            discount: 0,
+            discount_code: ""
         },
         prompt:{
             message: "",
             show: false
-        }
+        },
+        discounts: []
+        
     },
     methods: {
         fetchLessons() {
@@ -49,6 +53,18 @@ let app = new Vue({
                 .then(data => {
                     this.lessons = data
                 })
+        },
+        fetchDiscounts(){
+            fetch('./data/discounts.json')
+            .then(response => {
+                if (!response.ok) {
+                    console.log("faild to fetch");
+                }
+                return response.json()
+            })
+            .then(data => {
+                this.discounts = data;
+            })
         },
         addToCart(lesson) {
             if (lesson.spaces != 0) {
@@ -142,11 +158,22 @@ let app = new Vue({
         resetCart(){
             this.cart.lessons = [];
             this.cart.counter = 0;
+        },
+        applyDiscount(){
+
+            for(let discount of this.discounts.discounts){
+                if (discount.code.toLowerCase() === this.checkout.discount_code.toLowerCase()){
+                    this.checkout.discount = discount.rate;
+                    break;
+                }
+            }
+           
         }
     },
     mounted() {
         this.pages.lessons_page = true;
         this.fetchLessons();
+        this.fetchDiscounts();
     },
     computed: {
         filteredLessons() {
@@ -165,9 +192,17 @@ let app = new Vue({
             }
             return cartSubTotal;
         },
+        computedCart_Tax(){
+            let tax = this.computedCart_SubTotal * (this.checkout.tax / 100);
+            return tax;
+        },
+        computedCart_Discount(){
+            let discount = this.computedCart_SubTotal * (this.checkout.discount / 100);
+            return discount;
+
+        },
         computedCart_Total(){
-            let tax_added = this.computedCart_SubTotal * (this.checkout.tax / 100);
-            return (this.computedCart_SubTotal + tax_added); 
+            return (this.computedCart_SubTotal + this.computedCart_Tax) - this.computedCart_Discount; 
         }
     }
 });

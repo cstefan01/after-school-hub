@@ -1,0 +1,16 @@
+{
+    "discounts": [
+        {
+            "code": "save10",
+            "rate": 10
+        },
+        {
+            "code": "save20",
+            "rate": 20
+        },
+        {
+            "code": "save30",
+            "rate": 30
+        }
+    ]
+}

@@ -72,26 +72,27 @@
         <!-- End of Lessons Page -->
 
         <!-- Start of Cart Page -->
-        <div v-else-if="pages.cart_page" class="cart-wrapper">
+        <div v-else-if="pages.cart_page" class="wrapper">
             <div class="cart-card col-8 row">
                 <div class="col-8 shopping-cart h-100">
 
                     <div v-if="!isCartEmpty(cart.lessons.length)" class="h-75 w-100">
-                        <h2>Shopping Cart</h2>
+                        <div class="checkout-section-headline col-12">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <h2>Your Order</h2>
+                        </div>
+                       
                         <hr>
                         <div class="list-of-lessons">
                             <ul>
                                 <li v-for="(lesson, index) in cart.lessons" :key="index">
                                     <div class="lesson-image col-2 h-100 d-flex justify-content-center align-items-center">
                                         <img :src="lesson.image.path" :alt="lesson.image.alt">
-                                        <i :class="lesson.icon"></i>
                                     </div>
 
                                     <div class="col-5 h-100 d-flex justify-content-around  align-items-center flex-column  ">
                                         <h5>Subject</h5>
-                                        <h6>{{lesson.subject}}</h6>
-                                        
-                                        
+                                        <h6>{{lesson.subject}}</h6>  
                                     </div>
 
                                     <div class="col-3 h-100 d-flex justify-content-center align-items-center">
@@ -130,7 +131,7 @@
                 <div class="checkout col-4">
                     <div class="checkout-headline">
                         <h3>Checkout</h3>
-                        <h6>Qty: {{getCartSize()}}</h6>
+                        <h6>Items: {{getCartSize()}}</h6>
                     </div>
 
                     <hr>
@@ -146,15 +147,37 @@
                     </div>
 
                     <hr>
-
-                    <div class="cart-total d-flex flex-column p-2 w-100 float-start">
-                        <span>Sub-Total: £<span v-text="computedCart_SubTotal.toFixed(2)"></span></span>
-                        <span>Tax: <span v-text="checkout.tax"></span>%</span>
-                        <span>Total: £<span v-text="computedCart_Total.toFixed(2)"></span></span> 
+                    <div class="promo-gift d-flex">
+                        <input v-model="checkout.discount_code" type="text" placeholder="promo or gift code">
+                        <button v-on:click="applyDiscount">apply now</button>
                     </div>
 
-                    <button class="checkout-button" v-on:click="submitCheckoutForm">pay £{{computedCart_Total}}</button>
+                    <hr>
+
+                    <div class="cart-total d-flex  p-2 w-100">
+                        <div class="col-6 h-100 d-flex flex-column ps-3">
+                            <label class="lbl">Sub-Total:</label>
+                            <label class="lbl">Tax: </label>
+                            <label class="lbl">Discount: </label>
+                            <label class="lblTotal">Total</label>
+                        </div>
+
+                        <div class="col-6 h-100 d-flex flex-column align-items-end pe-2">
+                            <span class="txt">£{{computedCart_SubTotal.toFixed(2)}}</span>
+                            <span class="txt">£{{computedCart_Tax.toFixed(2)}}</span>
+                            <span class="txt">£{{computedCart_Discount.toFixed(2)}}</span>
+                            <span class="txtTotal">£{{computedCart_Total.toFixed(2)}}</span>
+                        </div>
+
+                    </div>
+
+                    <hr>
+
+                    <div class="w-100 d-flex justify-content-center align-items-center ">
+                        <button class="checkout-button" v-on:click="submitCheckoutForm">pay £{{computedCart_Total}}</button>
+                    </div>
                     <span class="prompt" v-if="prompt.show">{{prompt.message}}</span>
+                   
 
                 </div>
             </div>
