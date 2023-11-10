@@ -38,8 +38,7 @@ let app = new Vue({
             message: "",
             show: false
         },
-        discounts: []
-        
+        discounts: []     
     },
     methods: {
         fetchLessons() {
@@ -180,6 +179,7 @@ let app = new Vue({
             const queryWords = this.site.search_engine.query.toLowerCase().split(' ');
 
             return this.lessons.lessons.filter(lesson => {
+
                 return queryWords.every(word => {
                     return lesson.subject.toLowerCase().includes(word) || lesson.location.toLowerCase().includes(word);
                 });
