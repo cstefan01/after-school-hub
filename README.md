@@ -6,8 +6,11 @@ A basic web-based mobile application which allows students and their parents to 
 
 - `index.html`: The main HTML file for the website.
 - `css/style.css`: The stylesheet used to style the website.
+- `assets/images/`: The images source directory.
+- `assets/svg/`: The svg illustrations source directory.
 - `js/app.js`: The JavaScript file that handles dynamic content and interactions.
 - `data/lessons.json`: The data source in JSON format containing lesson information.
+- `data/discounts.json`: The data source in JSON format containing discounts information.
 
 ## 🚀 Getting Started
 

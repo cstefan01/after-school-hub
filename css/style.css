@@ -113,12 +113,15 @@ body {
     width: 100vw;
     overflow-x: hidden;
     line-height: 1;
+    background: green;
 }
 
 #app {
     display: flex;
     flex-direction: column;
-    width: 99vw;
+    min-width: 100vw;
+    min-height: 100vh;
+    background: yellow;
 }
 
 
@@ -192,6 +195,7 @@ i {
 
 .wrapper {
     background: #fddfdc;
+    min-height: 87vh;
 }
 
 .lessons-container {

@@ -15,6 +15,7 @@
 
 <body>
     <div id="app" v-cloak>
+        <!-- Start of Navigation Bar -->
         <div class="navbar container-fluid p-0">
             <div class="site-name col-6 p-4 h-100">
                 <i class="fa-solid fa-school"></i>
@@ -25,9 +26,9 @@
                     <i class="fa-solid fa-cart-shopping"></i>
                     <div class="counter" v-text="cart.counter"></div>
                 </div>
-
             </div>
         </div>
+        <!-- End of Navigation Bar -->
 
         <!-- Start of Lessons Page -->
         <div v-if="pages.lessons_page">
@@ -80,11 +81,7 @@
                 </div>
 
                 <div class="col-9 p-4 wrapper">
-                    <div v-if="lessons.isOnFetchingError">
-                        fetching error
-                    </div>
-
-                    <div v-else class="lessons-container col-12">
+                    <div class="lessons-container col-12">
                         <div class="lesson-card" v-for="lesson in filteredLessons" :key="lesson.id">
                             <div class="lesson-icon">
                                 <img :src="lesson.image.path" :alt="lesson.image.alt">
@@ -117,6 +114,13 @@
                             <img src="./assets/svg/not-found.svg" alt="">
                             <h3>Lessons not Found </h3>
                         </div>
+
+                        <div v-if="lessons.isOnFetchingError" class="no-lessons-found">
+                            <img src="./assets/svg/not-found.svg" alt="">
+                            <h3>Fetching Issues</h3>
+                        </div>
+
+
                     </div>
                     
                 </div>
@@ -244,14 +248,14 @@
         </div>
         <!-- End of Cart Page -->
 
+        <!-- Start of Footer Copyright -->
         <div class="copyright container-fluid">
             <span>Copyright &copy; {{copyright.year}}, {{site_name}} | All Rights Reserved.</span>
         </div>
-
+        <!-- End of Footer Copyright -->
     </div>
 
     <script src="./js/app.js"></script>
-
 </body>
 
 </html>
