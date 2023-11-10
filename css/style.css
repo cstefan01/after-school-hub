@@ -1,68 +1,185 @@
-/* Start of external fonts */
+/* ------------ Start of external fonts ------------ */
 
+/* Start of Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500&display=swap');
-/* End of external fonts */
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300&display=swap');
+/* End of Google Fonts */
+
+/* ------------ End of external fonts ------------ */
 
 
-/* Start of generic styling */
-body {
+
+/* ------------ Start of generic styling ------------ */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
     margin: 0;
     padding: 0;
-    animation: fade-in 1s ease-in-out;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
 }
 
-#app{
+ol,
+ul {
+    list-style: none;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+body {
+    animation: fade-in 1s ease-in-out;
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    line-height: 1;
+}
+
+#app {
     display: flex;
     flex-direction: column;
-    width: 100vw;
-    height: 100vh;
+    width: 99vw;
 }
 
-/* End of generic styling */
 
+/* Start of Scrollbar Config */
+::-webkit-scrollbar {
+    width: 17px;
+    background: #fddfdc;
+}
 
-/* Start of Navigation Bar */
-.navbar{
+::-webkit-scrollbar-thumb {
+    background: #BF4C41;
+}
+
+/* End of Scrollbar Config */
+
+[v-cloak] {
+    display: none;
+}
+
+/* ------------ End of generic styling ------------ */
+
+/* ------------ Start of Navigation Bar ------------  */
+.navbar {
     height: 60px;
     background: #BF4C41;
 }
 
-.navbar .site-name{
+.navbar .site-name {
     display: flex;
     justify-content: start;
-    align-items: center;  
+    align-items: center;
 }
 
-.navbar .site-name h1, i{
+.navbar .site-name h1,
+i {
     color: #fff;
     margin-right: 15px;
     font-family: 'Dancing Script', cursive;
     font-size: 2.5em;
 }
 
-.navigation{
+.navigation {
     display: flex;
     align-items: center;
     justify-content: end;
 }
-.navigation .cart i{
+
+.navigation .cart i {
     font-size: 2.2em;
     cursor: pointer;
     position: relative;
     z-index: 0;
 }
 
-.navigation .cart .counter{
+.navigation .cart .counter {
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
     z-index: 1;
-    top:3px;
+    top: 3px;
     right: 27px;
     background: #ec5c2c;
     border-radius: 20px;
@@ -71,20 +188,29 @@ body {
     cursor: pointer;
 }
 
-/* End of Navigation Bar */
-
-/* Start of Content */
+/* ------------ End of Navigation Bar ------------ */
 
 .wrapper {
+    background: #fddfdc;
+}
+
+.lessons-container {
     display: flex;
     flex: 1;
     flex-wrap: wrap;
     background: #fddfdc;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    min-height: 707px;
 }
 
-.lesson-card{
+/* ------------ Start of Lesson Card ------------ */
+
+.lesson-card {
     margin: 15px;
     height: 500px;
     width: 400px;
@@ -94,7 +220,7 @@ body {
     background: #fff;
 }
 
-.lesson-icon{
+.lesson-icon {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -104,11 +230,11 @@ body {
     background-color: #BF4C41;
 }
 
-.lesson-image{
+.lesson-image {
     padding: 12px;
 }
 
-.lesson-image img{
+.lesson-image img {
     width: 100%;
     height: 100%;
     position: relative;
@@ -119,11 +245,9 @@ body {
     position: absolute;
     z-index: 1;
     color: #ffffff;
-    
 }
 
-
-.spaces-tag{
+.spaces-tag {
     background: #BF4C41;
     font-size: 2em;
     padding: 10px;
@@ -134,7 +258,7 @@ body {
     border: solid white 2px;
 }
 
-.details{
+.details {
     position: absolute;
     z-index: 2;
     display: flex;
@@ -142,7 +266,8 @@ body {
     justify-content: center;
     align-items: center;
 }
-.price-tag{
+
+.price-tag {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -162,18 +287,44 @@ body {
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.5);
 }
 
-.lesson-icon i{
+.lesson-icon i {
     font-size: 4em;
     margin: 0;
 }
 
-.lesson-icon p{
+.no-lessons-found{
+    width: 400px;
+    height: 400px;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
+}
+
+.no-lessons-found img{
+    width: 80%;
+    height: 40%;
+}
+
+.no-lessons-found h3{
+    color: #bdbdbd;
+    font-size: 1.3em;
+    margin-top: 20px;
+    font-family: 'Red Hat Display', sans-serif;
+}
+
+
+
+.lesson-icon p {
     color: #fff;
     font-size: 2em;
     font-family: 'Josefin Sans', sans-serif;
 }
 
-.lesson-icon img{
+.lesson-icon img {
     position: relative;
     z-index: 0;
     width: 100%;
@@ -183,14 +334,14 @@ body {
 
 }
 
-.lesson-info{
+.lesson-info {
     display: flex;
     flex-direction: column;
     width: 100%;
     padding: 10px;
 }
 
-.card-button{
+.card-button {
     border: none;
     width: 100%;
     height: 70px;
@@ -203,38 +354,26 @@ body {
     position: relative;
     bottom: 45px;
 }
-/* End of Content /*
 
-/* Start of Footer */
+/* ------------ End of Lesson Card ------------ */
 
-.footer{
-    height: 400px;
-    background: #c16f67;
-}
-
-.copyright{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 70px;
-    color: #fff;
-    background: #BF4C41;
-}
-
-/* End of Footer */
-
-
-[v-cloak] {
-    display: none;
-}
-  
-
-.lessons-filter{
+.lessons-filter {
     width: 90%;
     background: #BF4C41;
     height: 500px;
     border-radius: 12px;
 }
+
+.primary-bg{
+    background: #fddfdc;
+}
+
+.filter {
+    border-radius: 12px;
+    background: #fff;
+}
+
+/* ------------ Start of Checkout ------------ */
 
 .checkout {
     display: flex;
@@ -245,7 +384,7 @@ body {
     border-radius: 0px 12px 12px 0px;
 }
 
-.checkout-button{
+.checkout-button {
     border: none;
     text-transform: capitalize;
     color: #fff;
@@ -258,29 +397,43 @@ body {
     top: 40px;
 }
 
-.dual-entry input{
+.dual-entry input {
     width: 48%;
 }
 
-.search-bar{
-    height: 70px;
-    padding: 10px;
+.left-panel {
+    height: 20%;
 }
 
-.search-bar input{
+/* ------------ End of Checkout ------------ */
+
+
+/* ------------ Start of Search Bar ------------ */
+.search-bar {
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.search-bar input {
     height: 100%;
+    width: 100%;
     text-align: center;
     border: none;
     border-radius: 15px;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 }
 
-.search-bar input:focus{
+.search-bar input:focus {
     outline: none;
 }
 
+/* ------------ End of Search Bar ------------ */
 
-.cart-card{
+/* ------------ Start of Cart ------------ */
+.cart-card {
     height: 700px;
     background-color: #fff;
     margin: 100px;
@@ -288,15 +441,15 @@ body {
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 }
 
-.shopping-cart{
+.shopping-cart {
     border-radius: 20px 0px 0px 20px;
     background: #fff;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     padding: 20px;
-    
+
 }
 
-.list-of-lessons{
+.list-of-lessons {
     overflow: auto;
     height: 60%;
     width: 100%;
@@ -304,17 +457,17 @@ body {
 
 }
 
-.shopping-cart h2{
+.shopping-cart h2 {
     font-size: 2em;
     color: #000;
 }
 
-.shopping-cart ul{
+.shopping-cart ul {
     width: 100%;
     padding: 3px;
 }
 
-.shopping-cart ul li{
+.shopping-cart ul li {
     list-style: none;
     width: 100%;
     display: flex;
@@ -328,13 +481,13 @@ body {
 
 
 
-.remove-icon{
+.remove-icon {
     cursor: pointer;
     color: #000;
     font-size: 1.5em;
 }
 
-.no-cart-items-error{
+.no-cart-items-error {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -342,7 +495,7 @@ body {
     height: 90%;
 }
 
-.no-cart-items-error button{
+.no-cart-items-error button {
     border: none;
     margin-top: 10px;
     font-size: .7em;
@@ -352,13 +505,13 @@ body {
     background-color: transparent;
 }
 
-.no-cart-items-error button:hover{
+.no-cart-items-error button:hover {
     background-color: #BF4C41;
     color: #fff;
     font-weight: bold;
 }
 
-.message{
+.message {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -367,25 +520,25 @@ body {
     font-size: larger;
 }
 
-.message i{
+.message i {
     color: #000;
     margin-bottom: 10px;
 }
 
-.continue-shopping{
+.continue-shopping {
     color: #1e1e1e;
     font-weight: bold;
 }
 
-.continue-shopping i{
+.continue-shopping i {
     font-size: 1.2em;
     color: #1e1e1e;
 }
 
 .continue-shopping:hover i,
 .continue-shopping:hover span {
-  color: #BF4C41;
-  cursor: pointer;
+    color: #BF4C41;
+    cursor: pointer;
 }
 
 .cart-total {
@@ -396,11 +549,11 @@ body {
     background: #fcfcfc;
 }
 
-.cart-total span{
+.cart-total span {
     margin-right: 10px;
 }
 
-.entry input{
+.entry input {
     text-align: center;
     border: solid rgb(160, 160, 160) 1px;
     padding: 10px;
@@ -408,22 +561,23 @@ body {
     margin: 5px;
 }
 
-.promo-gift input[type="text"]{
+.promo-gift input[type="text"] {
     border: none;
     width: 73%;
     font-size: 1em;
     text-transform: uppercase;
 }
-.promo-gift input[type="text"]::placeholder{
+
+.promo-gift input[type="text"]::placeholder {
     text-transform: uppercase;
     color: rgb(207, 207, 207);
 }
 
-.promo-gift input[type="text"]:focus{
+.promo-gift input[type="text"]:focus {
     outline: none;
 }
 
-.promo-gift button{
+.promo-gift button {
     border: none;
     text-transform: uppercase;
     padding: 10px;
@@ -431,7 +585,8 @@ body {
     color: #fff;
     border-radius: 30px;
 }
-.prompt{
+
+.prompt {
     color: rgb(231, 34, 34);
     text-align: center;
     width: 100%;
@@ -440,27 +595,28 @@ body {
 }
 
 
-.checkout-headline{
+.checkout-headline {
     display: flex;
     width: 100%;
     align-items: center;
     justify-content: space-between;
 }
 
-.lblTotal{
+.lblTotal {
     text-transform: uppercase;
     font-weight: bold;
 }
 
-.txtTotal{
+.txtTotal {
     font-weight: bold;
 }
 
-.lbl, .txt{
+.lbl,
+.txt {
     font-family: 'Dosis', sans-serif;
 }
-    
-.checkout-section-headline{
+
+.checkout-section-headline {
     display: flex;
     align-items: center;
     justify-content: start;
@@ -468,32 +624,54 @@ body {
     font-family: 'Roboto Slab', serif;
 }
 
-.checkout-section-headline i, h2{
+.checkout-section-headline i,
+h2 {
     font-size: 1.5em;
     color: #000;
 }
 
 
-/* Start of Animations */
+.filter {
+    height: 600px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+/* ------------ End of Cart ------------ */
+
+
+/* ------------ Start of Footer ------------ */
+.copyright {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    color: #fff;
+    background: #BF4C41;
+}
+
+/* ------------ End of Footer ------------- */
+
+/* ------------ Start of Animations ------------ */
 
 @-webkit-keyframes fade-in {
     0% {
-      opacity: 0;  
+        opacity: 0;
     }
+
     100% {
-      opacity: 1;
+        opacity: 1;
     }
-  }
-  @keyframes fade-in {
+}
+
+@keyframes fade-in {
     0% {
-      opacity: 0;
+        opacity: 0;
     }
+
     100% {
-      opacity: 1;
+        opacity: 1;
 
     }
-  }
+}
 
-/* End of Animations */
-
-
+/* ------------ End of Animations ------------ */
