@@ -159,6 +159,38 @@
         "alt": "",
         "path": "https://lahstalon.org/wp-content/uploads/2015/10/English-10-news-section-WEB-900x600.jpg"
       }
+    },
+    {
+      "id": 11,
+      "icon": "fa-solid fa-running",
+      "subject": "Physical Education",
+      "location": "Tokyo",
+      "price": 85,
+      "spaces": 5,
+      "date": "05/11/2023",
+      "starts_at": "10:00AM",
+      "ends_at": "12:00PM",
+      "button_text": "Add to Cart",
+      "image": {
+        "alt": "",
+        "path": "https://wpvip.edutopia.org/wp-content/uploads/2022/10/shutterstock_2025071180-crop.jpg"
+      }
+    },
+    {
+      "id": 12,
+      "icon": "fa-solid fa-book-open",
+      "subject": "Literature",
+      "location": "New Delhi",
+      "price": 95,
+      "spaces": 5,
+      "date": "07/11/2023",
+      "starts_at": "19:30PM",
+      "ends_at": "22:30PM",
+      "button_text": "Add to Cart",
+      "image": {
+        "alt": "",
+        "path": "https://lahstalon.org/wp-content/uploads/2015/10/English-10-news-section-WEB-900x600.jpg"
+      }
     }
   ]
 }
