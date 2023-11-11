@@ -45,19 +45,19 @@
                         <div>
                             <h3>Sort By</h3>
                             <div>
-                                <input type="radio">
+                                <input type="radio" v-model="sortBy" value="subject">
                                 <label>Subject</label>
                             </div>
                             <div>
-                                <input type="radio">
+                                <input type="radio" v-model="sortBy" value="location">
                                 <label>Location</label>
                             </div>
                             <div>
-                                <input type="radio">
+                                <input type="radio" v-model="sortBy" value="price">
                                 <label>Price</label>
                             </div>
                             <div>
-                                <input type="radio">
+                                <input type="radio" v-model="sortBy" value="spaces">
                                 <label>Spaces</label>
                             </div>
                         </div>
@@ -66,11 +66,11 @@
                         <div>
                             <h3>Order By</h3>
                             <div>
-                                <input type="radio">
+                                <input type="radio" v-model="sortOrder" value="asc">
                                 <label>Ascending</label>
                             </div>
                             <div>
-                                <input type="radio">
+                                <input type="radio" v-model="sortOrder" value="desc">
                                 <label>Descending</label>
                             </div>
                         </div>
@@ -82,7 +82,7 @@
 
                 <div class="col-9 p-4 wrapper">
                     <div class="lessons-container col-12">
-                        <div class="lesson-card" v-for="lesson in filteredLessons" :key="lesson.id">
+                        <div class="lesson-card" v-for="lesson in  filteredAndSortedLessons" :key="lesson.id">
                             <div class="lesson-icon">
                                 <img :src="lesson.image.path" :alt="lesson.image.alt">
                                 <div class="details">
@@ -110,7 +110,7 @@
                             <button class="card-button" v-on:click="addToCart(lesson)">{{lesson.button_text}}</button>
                         </div>
 
-                        <div v-if="filteredLessons.length===0" class="no-lessons-found">
+                        <div v-if="filteredAndSortedLessons.length===0" class="no-lessons-found">
                             <img src="./assets/svg/not-found.svg" alt="">
                             <h3>Lessons not Found </h3>
                         </div>
@@ -241,25 +241,23 @@
                             £{{computedCart_Total.toFixed(2)}}</button>
                     </div>
                     <span class="prompt" v-if="prompt.show">{{prompt.message}}</span>
-
-
                 </div>
             </div>
         </div>
         <!-- End of Cart Page -->
 
-        <div class="checkout-confirmation container-fluid" v-if="pages.checkout_confirmation_page">
+        <div class="checkout-confirmation container-fluid" v-if="checkout.confirmation_popup" v-on:click="hideConfirmationPopUp">
             <div class="confirmation col-4">
                 <div class="content container-fluid">
-                    <i class="fa-solid fa-face-smile-wink"></i>
                     <h3>Thank you for your purchase today, {{checkout.fields.first_name}}!</h3>
-                    <p> 🎉 You've successfully booked <em class="highlight">[Number of Lessons]</em> lessons! Get ready for an enriching learning journey with the <em class="highlight">{{site_name}}</em>.</p>
+                    <hr class="divider">
+                    <p> 🎉 You've successfully booked <em class="highlight">{{computedCartSize}}</em> lessons! Get ready for an enriching learning journey with the <em class="highlight">{{site_name}}</em>.</p>
                     <p>📧 An email confirmation with details of all your booked lessons is on its way.</p>
-                    <p>Your first upcoming lesson is on <em class="highlight">[Date]</em> in <em class="highlight">[Location]</em>, starting at <em class="highlight">[Start Time]</em> and finishing at <em class="highlight">[End Time]</em>.</p>
-                    <p>Need anything else? We're here to help. Enjoy your lessons!</p>
+                    <p>Your first upcoming lesson is on <em class="highlight">{{cart.lessons[0].date}}</em> in <em class="highlight">{{cart.lessons[0].location}}</em>, starting at <em class="highlight">{{cart.lessons[0].starts_at}}</em> and finishing at <em class="highlight">{{cart.lessons[0].ends_at}}</em>.</p>
+                    <p><b>Need anything else? We're here to help. Enjoy your lessons!</b></p>
                 </div>
                 <div class="panel container-fluid">
-                    <button>close</button>
+                    <button v-on:click="hideConfirmationPopUp">close</button>
                 </div>
                 
             </div>
