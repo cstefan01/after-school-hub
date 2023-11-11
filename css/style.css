@@ -7,6 +7,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 /* End of Google Fonts */
 
 /* ------------ End of external fonts ------------ */
@@ -196,6 +197,9 @@ i {
 .wrapper {
     background: #fddfdc;
     min-height: 87vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .lessons-container {
@@ -209,7 +213,7 @@ i {
     padding: 15px;
     border-radius: 12px;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-    min-height: 707px;
+    min-height: 820px;
 }
 
 /* ------------ Start of Lesson Card ------------ */
@@ -359,14 +363,11 @@ i {
     bottom: 45px;
 }
 
-/* ------------ End of Lesson Card ------------ */
-
-.lessons-filter {
-    width: 90%;
-    background: #BF4C41;
-    height: 500px;
-    border-radius: 12px;
+.card-button:hover{
+    background-color: #bb5c53;
 }
+
+/* ------------ End of Lesson Card ------------ */
 
 .primary-bg{
     background: #fddfdc;
@@ -374,7 +375,8 @@ i {
 
 .filter {
     border-radius: 12px;
-    background: #fff;
+    background: #fff;   
+    min-height: 716px;
 }
 
 /* ------------ Start of Checkout ------------ */
@@ -491,6 +493,10 @@ i {
     font-size: 1.5em;
 }
 
+.remove-icon:hover{
+    color: #bc3f34;
+}
+
 .no-cart-items-error {
     display: flex;
     flex-direction: column;
@@ -590,6 +596,10 @@ i {
     border-radius: 30px;
 }
 
+.promo-gift button:hover{
+    background-color: #bb5c53;
+}
+
 .prompt {
     color: rgb(231, 34, 34);
     text-align: center;
@@ -643,6 +653,73 @@ h2 {
 /* ------------ End of Cart ------------ */
 
 
+.checkout-confirmation{
+    position: fixed;
+    height: 100vh;
+    background: #bb5c5339;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkout-confirmation .content{
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    background: #f8beb9;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #bb5c53;
+    border-radius:20px 20px 0px 0px;
+    height: 85%;
+    color: #090909;
+}
+
+.checkout-confirmation .content h3{
+    font-size: 1.8em;
+    font-family: 'Pacifico', cursive;
+
+    margin-bottom: 20px;
+}
+
+.checkout-confirmation .content i{
+    font-size: 3.5em;
+}
+
+.confirmation{
+    height: 400px;
+    background: #ffffff;
+    border-radius: 20px;
+}
+
+
+.highlight{
+    color: #BF4C41;
+    font-weight: bold;
+    font-style: normal;
+}
+
+.confirmation .header i{
+    cursor: pointer;
+}
+
+.checkout-confirmation .panel{
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.checkout-confirmation .panel button{
+    border: none;
+    width: 150px;
+    height: 40px;
+    background: #BF4C41;
+    color: #fff;
+    font-weight: bold;
+}
+
 /* ------------ Start of Footer ------------ */
 .copyright {
     display: flex;
@@ -651,8 +728,7 @@ h2 {
     height: 70px;
     color: #fff;
     background: #BF4C41;
-}
-
+} 
 /* ------------ End of Footer ------------- */
 
 /* ------------ Start of Animations ------------ */

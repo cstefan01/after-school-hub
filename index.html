@@ -45,20 +45,20 @@
                         <div>
                             <h3>Sort By</h3>
                             <div>
-                                <input type="radio" id="subject" value="subject" v-model="sortAttribute">
-                                <label for="subject">Subject</label>
+                                <input type="radio">
+                                <label>Subject</label>
                             </div>
                             <div>
-                                <input type="radio" id="location" value="location" v-model="sortAttribute">
-                                <label for="location">Location</label>
+                                <input type="radio">
+                                <label>Location</label>
                             </div>
                             <div>
-                                <input type="radio" id="price" value="price" v-model="sortAttribute">
-                                <label for="price">Price</label>
+                                <input type="radio">
+                                <label>Price</label>
                             </div>
                             <div>
-                                <input type="radio" id="spaces" value="spaces" v-model="sortAttribute">
-                                <label for="spaces">Spaces</label>
+                                <input type="radio">
+                                <label>Spaces</label>
                             </div>
                         </div>
 
@@ -66,12 +66,12 @@
                         <div>
                             <h3>Order By</h3>
                             <div>
-                                <input type="radio" id="asc" value="asc" v-model="sortOrder">
-                                <label for="asc">Ascending</label>
+                                <input type="radio">
+                                <label>Ascending</label>
                             </div>
                             <div>
-                                <input type="radio" id="desc" value="desc" v-model="sortOrder">
-                                <label for="desc">Descending</label>
+                                <input type="radio">
+                                <label>Descending</label>
                             </div>
                         </div>
                         <hr>
@@ -161,7 +161,7 @@
                                     </div>
 
                                     <div
-                                        class="col-2 h-100 d-flex justify-content-center align-items-center text-center ">
+                                        class="col-2 h-100 d-flex justify-content-center align-items-center text-center">
                                         <i class="remove-icon fa-solid fa-trash"
                                             v-on:click="removeFromCart(lesson)"></i>
                                     </div>
@@ -247,6 +247,23 @@
             </div>
         </div>
         <!-- End of Cart Page -->
+
+        <div class="checkout-confirmation container-fluid" v-if="pages.checkout_confirmation_page">
+            <div class="confirmation col-4">
+                <div class="content container-fluid">
+                    <i class="fa-solid fa-face-smile-wink"></i>
+                    <h3>Thank you for your purchase today, {{checkout.fields.first_name}}!</h3>
+                    <p> 🎉 You've successfully booked <em class="highlight">[Number of Lessons]</em> lessons! Get ready for an enriching learning journey with the <em class="highlight">{{site_name}}</em>.</p>
+                    <p>📧 An email confirmation with details of all your booked lessons is on its way.</p>
+                    <p>Your first upcoming lesson is on <em class="highlight">[Date]</em> in <em class="highlight">[Location]</em>, starting at <em class="highlight">[Start Time]</em> and finishing at <em class="highlight">[End Time]</em>.</p>
+                    <p>Need anything else? We're here to help. Enjoy your lessons!</p>
+                </div>
+                <div class="panel container-fluid">
+                    <button>close</button>
+                </div>
+                
+            </div>
+        </div>
 
         <!-- Start of Footer Copyright -->
         <div class="copyright container-fluid">
