@@ -40,7 +40,7 @@
                         <input v-model="site.search_engine.query" :placeholder="site.search_engine.placeholder">
                     </div>
                     <div class="filter p-4 d-flex flex-column">
-                        <h2>Lessons Filter</h2>
+                        <h2>Lessons Filter <i class="fa-solid fa-filter"></i></h2>
                         <hr>
                         <div>
                             <h3>Sort By</h3>
@@ -67,14 +67,14 @@
                             <h3>Order By</h3>
                             <div>
                                 <input type="radio" v-model="sortOrder" value="asc">
-                                <label>Ascending</label>
+                                <label>Ascending <i class="fa-solid fa-arrow-up-wide-short"></i></label>
                             </div>
                             <div>
                                 <input type="radio" v-model="sortOrder" value="desc">
-                                <label>Descending</label>
+                                <label>Descending <i class="fa-solid fa-arrow-down-short-wide"></i></label>
+                                
                             </div>
                         </div>
-                        <hr>
 
                     </div>
 
@@ -120,7 +120,6 @@
                             <h3>Fetching Issues</h3>
                         </div>
 
-
                     </div>
                     
                 </div>
@@ -142,33 +141,40 @@
                         </div>
 
                         <hr>
+
                         <div class="list-of-lessons">
                             <ul>
                                 <li v-for="(lesson, index) in cart.lessons" :key="index">
-                                    <div
-                                        class="lesson-image col-2 h-100 d-flex justify-content-center align-items-center">
+                                    <div class="lesson-image col-2">
                                         <img :src="lesson.image.path" :alt="lesson.image.alt">
                                     </div>
 
-                                    <div
-                                        class="col-5 h-100 d-flex justify-content-around  align-items-center flex-column  ">
+                                    <div class="col-2">
                                         <h5>Subject</h5>
                                         <h6>{{lesson.subject}}</h6>
                                     </div>
 
-                                    <div class="col-3 h-100 d-flex justify-content-center align-items-center">
-                                        £{{lesson.price}}
+                                    <div class="col-2">
+                                        <h5>Location</h5>
+                                        <h6>{{lesson.location}}</h6>
                                     </div>
 
-                                    <div
-                                        class="col-2 h-100 d-flex justify-content-center align-items-center text-center">
-                                        <i class="remove-icon fa-solid fa-trash"
-                                            v-on:click="removeFromCart(lesson)"></i>
+                                    <div class="col-2">
+                                        <h5>Date</h5>
+                                        <h6>{{lesson.date}}</h6>
                                     </div>
 
+                                    <div class="col-2">
+                                        <h5>Price</h5>
+                                        <h6>£{{lesson.price}}</h6>
+                                        
+                                    </div>
+
+                                    <div class="col-2 h-100 d-flex justify-content-center align-items-center text-center">
+                                        <i class="remove-icon fa-solid fa-trash" v-on:click="removeFromCart(lesson)"></i>
+                                    </div>
                                 </li>
                             </ul>
-
                         </div>
 
                         <hr>
@@ -246,6 +252,7 @@
         </div>
         <!-- End of Cart Page -->
 
+        <!-- Start of Checkout Confirmation Popup -->
         <div class="checkout-confirmation container-fluid" v-if="checkout.confirmation_popup" v-on:click="hideConfirmationPopUp">
             <div class="confirmation col-4">
                 <div class="content container-fluid">
@@ -262,6 +269,7 @@
                 
             </div>
         </div>
+        <!-- End of Checkout Confirmation Popup -->
 
         <!-- Start of Footer Copyright -->
         <div class="copyright container-fluid">
