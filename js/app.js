@@ -30,8 +30,10 @@ let app = new Vue({
         email_address: "",
         phone: "",
       },
+      sub_total: 0,
       tax: 0,
       discount: 0,
+      total: 0,
       discount_code: "",
       confirmation_popup: false,
     },
@@ -43,62 +45,94 @@ let app = new Vue({
     discounts: [],
     sortBy: "subject",
     sortOrder: "asc",
+
+    endpoints: {
+      host: "http://after-school-hub-env2.eba-iijwxnmm.eu-west-2.elasticbeanstalk.com",
+      lessons: "/lessons",
+      orders: "/orders",
+    }
   },
   methods: {
-    /**
-     * Fetch and set lessons data from a JSON file.
-     * The JSON file should be located at "./data/lessons.json".
-     * Sets an error flag if the fetch operation fails.
-     */
-    fetchLessons() {
-      // Perform a fetch operation to get lessons data from the specified JSON file
-      fetch("./data/lessons.json")
-        .then((response) => {
-          // Check if the fetch operation is successful
-          if (!response.ok) {
-            // Set an error flag if the fetch operation fails
-            this.lessons.isOnFetchingError = true;
-          }
-           // Parse the response as JSON and return it
-          return response.json();
-        })
-        .then((data) => {
-            // Set the fetched lessons data to the component's 'lessons' property
-          this.lessons = data;
-        });
+
+    extractOrderIds(orders) {
+      return orders.map(order => order._id);
     },
-    /**
-     * Fetch and set discounts data from a JSON file.
-     * The JSON file should be located at "./data/discounts.json".
-     * Logs a message if the fetch operation fails.
-     */
-    fetchDiscounts() {
-      // Perform a fetch operation to get discounts data from the specified JSON file
-      fetch("./data/discounts.json")
-        .then((response) => {
-          // Check if the fetch operation is successful
-          if (!response.ok) {
-            console.log("faild to fetch");
-          }
-          // Parse the response as JSON and return it
-          return response.json();
-        })
-        .then((data) => {
-          // Set the fetched discounts data to the component's 'discounts' property
-          this.discounts = data;
-        });
+    async submitOrder() {
+      const order = {
+        created_at: new Date(),
+        customer: {
+          first_name: this.checkout.fields.first_name,
+          last_name: this.checkout.fields.last_name,
+          email_address: this.checkout.fields.email_address,
+          phone: this.checkout.fields.phone
+        },
+        lessons: this.extractOrderIds(this.cart.lessons),
+        sub_total: this.checkout.sub_total.toFixed(2),
+        tax: this.checkout.tax.toFixed(2),
+        discount: this.checkout.discount.toFixed(2),
+        total: this.checkout.total.toFixed(2)
+      };
+
+      const header = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(order),
+      };
+
+      try {
+        const endpoint = `${this.endpoints.host}${this.endpoints.orders}1`;
+
+        const response = await fetch(endpoint, header);
+
+        if (!response.ok) {
+          // Handle error if the response status is not OK (e.g., 4xx or 5xx)
+          throw new Error(`Failed to submit order: ${response.statusText}`);
+        }
+
+        const response_json = await response.json();
+
+        const response_status = response_json.status;
+
+        if (response_status === 201) {
+          this.showConfirmationPopUp();
+        }
+
+      } catch (error) {
+        console.error('Error submitting order:', error.message);
+      }
+    },
+    async getLessons() {
+      try {
+        const endpoint = `${this.endpoints.host}${this.endpoints.lessons}`;
+
+        const response = await fetch(endpoint);
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const lesson = await response.json();
+
+        return lesson;
+
+      } catch (error) {
+        console.error('There was a problem in fetching lesson spaces:', error);
+        throw error;
+      }
+    },
+
+    fetchLessons() {
+      this.getLessons().then((lessons) => {
+        this.lessons.lessons = lessons;
+      })
     },
     addToCart(lesson) {
       if (lesson.spaces != 0) {
         this.cart.lessons.push(lesson);
         this.cart.counter = this.cart.lessons.length;
         lesson.spaces -= 1;
-
-        if (lesson.spaces == 0) {
-          lesson.button_text = "Out of Spaces";
-        } else {
-          lesson.button_text = "Add to Cart";
-        }
       }
     },
     removeFromCart(lesson) {
@@ -146,7 +180,7 @@ let app = new Vue({
 
       // Iterate through the provided form field values
       Array.from(arguments).forEach(function (value) {
-         // Check if the current form field value is empty
+        // Check if the current form field value is empty
         if (value === "") {
           isFormEmpty = true;
         }
@@ -230,7 +264,9 @@ let app = new Vue({
         isFirstNameValid &&
         isLastNameValid
       ) {
-        this.showConfirmationPopUp();
+
+        this.submitOrder();
+
       } else if (isFormEmpty) {
         this.setPrompt(
           "missing fields - please fill out the missing fields",
@@ -289,7 +325,7 @@ let app = new Vue({
           // Update the checkout's discount rate
           this.checkout.discount = discount.rate;
           isDiscountFound = true;
-           // Exit the loop once a matching discount code is found
+          // Exit the loop once a matching discount code is found
           break;
         }
       }
@@ -343,33 +379,28 @@ let app = new Vue({
         return 0;
       });
     },
+    async searchLessons() {
+      try {
+        let endpoint = "";
 
-    /**
-     * Filter lessons based on search query words.
-     * Uses subject and location properties of lessons for filtering.
-     * @param {Array} lessons - The array of lessons to be filtered.
-     * @returns {Array} - The filtered array of lessons.
-     */
-    filterLessons(lessons) {
-      // Retrieve query words from the search engine's query
-      const queryWords = this.site.search_engine.query.toLowerCase().split(" ");
+        if (this.site.search_engine.query == "") {
+          this.fetchLessons();
+        } else {
+          endpoint = `${this.endpoints.host}${this.endpoints.lessons}?search=${this.site.search_engine.query}`;
 
-      // Filter lessons based on the search query words
-      return lessons.filter((lesson) => {
-         // Check if every query word is present in either subject or location of the lesson
-        return queryWords.every((word) => {
-          return (
-            lesson.subject.toLowerCase().includes(word) ||
-            lesson.location.toLowerCase().includes(word)
-          );
-        });
-      });
-    }
+          const response = await fetch(endpoint);
+
+          const lessons = await response.json();
+          this.lessons.lessons = lessons;
+        }
+      } catch (error) {
+        console.error('Error fetching lessons:', error);
+      }
+    },
   },
-  mounted() {
+  beforeMount() {
     this.pages.lessons_page = true;
     this.fetchLessons();
-    this.fetchDiscounts();
   },
   computed: {
     computedCart_SubTotal() {
@@ -377,30 +408,33 @@ let app = new Vue({
       for (let lesson of this.cart.lessons) {
         cartSubTotal += lesson.price;
       }
+      this.checkout.sub_total = cartSubTotal;
       return cartSubTotal;
     },
     computedCart_Tax() {
       let tax = this.computedCart_SubTotal * (this.checkout.tax / 100);
+      this.checkout.tax = tax;
       return tax;
     },
     computedCart_Discount() {
-      let discount =
-        this.computedCart_SubTotal * (this.checkout.discount / 100);
+      let discount = this.computedCart_SubTotal * (this.checkout.discount / 100);
+      this.checkout.discount = discount;
       return discount;
     },
     computedCart_Total() {
-      return (
-        this.computedCart_SubTotal +
-        this.computedCart_Tax -
-        this.computedCart_Discount
-      );
+      const cart_total = this.computedCart_SubTotal + this.computedCart_Tax - this.computedCart_Discount;
+      this.checkout.total = cart_total;
+      return cart_total;
     },
     computedCartSize() {
       return this.cart.lessons.length;
     },
-    filteredAndSortedLessons() {
-      const sorted = this.sortLessons();
-      return this.filterLessons(sorted);
+    filteredLessons() {
+      const queryWords = this.site.search_engine.query.toLowerCase().split(" ");
+
+      return this.lessons.lessons;
     },
+
+
   },
 });

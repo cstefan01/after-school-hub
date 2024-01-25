@@ -37,7 +37,7 @@
 
                 <div class="primary-bg col-3 p-4">
                     <div class="search-bar mb-3">
-                        <input v-model="site.search_engine.query" :placeholder="site.search_engine.placeholder">
+                        <input v-model="site.search_engine.query" :placeholder="site.search_engine.placeholder" @input="searchLessons">
                     </div>
                     <div class="filter p-4 d-flex flex-column">
                         <h2>Lessons Filter <i class="fa-solid fa-filter"></i></h2>
@@ -82,7 +82,7 @@
 
                 <div class="col-9 p-4 wrapper">
                     <div class="lessons-container col-12">
-                        <div class="lesson-card" v-for="lesson in  filteredAndSortedLessons" :key="lesson.id">
+                        <div class="lesson-card" v-for="lesson in filteredLessons" :key="lesson.id">
                             <div class="lesson-icon">
                                 <img :src="lesson.image.path" :alt="lesson.image.alt">
                                 <div class="details">
@@ -107,10 +107,10 @@
                                 £{{lesson.price.toFixed(2)}}
                             </div>
 
-                            <button class="card-button" v-on:click="addToCart(lesson)">{{lesson.button_text}}</button>
+                            <button class="card-button" v-on:click="addToCart(lesson)">Add to Cart</button>
                         </div>
 
-                        <div v-if="filteredAndSortedLessons.length===0" class="no-lessons-found">
+                        <div v-if="filteredLessons.length===0" class="no-lessons-found">
                             <img src="./assets/svg/not-found.svg" alt="">
                             <h3>Lessons not Found </h3>
                         </div>
@@ -166,7 +166,7 @@
 
                                     <div class="col-2">
                                         <h5>Price</h5>
-                                        <h6>£{{lesson.price}}</h6>
+                                        <h6>£{{lesson.price.toFixed(2)}}</h6>
                                         
                                     </div>
 
