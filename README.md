@@ -20,8 +20,9 @@ To get started with this website, follow these steps:
 
    ```bash
    git clone https://github.com/your-username/basic-website.git
-
+   ```
 
 ## 📧 GitHub Info
+
 - **GitHub Repository:** 👉 [click here](https://github.com/cstefan01/after-school-hub)
-- **GitHub Pages:** 👉 [click here](https://cstefan01.github.io/after-school-hub/)
+- **GitHub Pages:** 👉 [click here](https://cstefan01.github.io/after-school-hub-1/)
