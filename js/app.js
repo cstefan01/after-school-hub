@@ -47,7 +47,7 @@ let app = new Vue({
     sortOrder: "asc",
 
     endpoints: {
-      host: "http://after-school-hub-env2.eba-iijwxnmm.eu-west-2.elasticbeanstalk.com",
+      host: "https://after-school-hub-env2.eba-iijwxnmm.eu-west-2.elasticbeanstalk.com",
       lessons: "/lessons",
       orders: "/orders",
     }
