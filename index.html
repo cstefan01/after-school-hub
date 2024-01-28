@@ -107,7 +107,8 @@
                                 £{{lesson.price.toFixed(2)}}
                             </div>
 
-                            <button class="card-button" v-on:click="addToCart(lesson)">Add to Cart</button>
+                            <button v-if = "lesson.spaces > 0" class="card-button" v-on:click="addToCart(lesson)">Add to Cart</button>
+                            <button v-else class="card-button">Out of Lessons</button>
                         </div>
 
                         <div v-if="filteredLessons.length===0" class="no-lessons-found">
