@@ -146,7 +146,7 @@
                             <ul>
                                 <li v-for="(lesson, index) in cart.lessons" :key="index">
                                     <div class="lesson-image col-2">
-                                        <img :src="lesson.image.path" :alt="lesson.image.alt">
+                                        <img :src="parseImageUrl(lesson.image.path)" :alt="lesson.image.alt">
                                     </div>
 
                                     <div class="col-2">

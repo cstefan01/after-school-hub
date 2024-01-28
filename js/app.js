@@ -47,7 +47,7 @@ let app = new Vue({
     sortOrder: "asc",
 
     endpoints: {
-      host: "https://after-school-hub-env2.eba-iijwxnmm.eu-west-2.elasticbeanstalk.com",
+      host: "http://WORKSTATION1:3000",
       lessons: "/lessons",
       orders: "/orders",
       images: "/images"
@@ -58,6 +58,15 @@ let app = new Vue({
     extractOrderIds(orders) {
       return orders.map(order => order._id);
     },
+
+    updateLessonsSpaces() {
+      const cart_lessons = this.extractOrderIds(this.cart.lessons);
+      cart_lessons.forEach((lessonID) => {
+        this.decrementLessonSpacesByID(lessonID);
+      })
+    },
+
+    // ========================= Requests =========================
     async submitOrder() {
       const order = {
         created_at: new Date(),
@@ -123,12 +132,86 @@ let app = new Vue({
         throw error;
       }
     },
+    async getLessonByID(lessonId) {
+      const endpoint = `${this.endpoints.host}${this.endpoints.lessons}/${lessonId}`;
+
+      try {
+        const response = await fetch(endpoint, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`Failed to get lesson by ID: ${response.statusText}`);
+        }
+
+        const lesson = await response.json();
+        console.log('Lesson retrieved successfully:', lesson);
+        return lesson;
+      } catch (error) {
+        console.error('Error getting lesson by ID:', error.message);
+        throw error; // Rethrow the error if needed
+      }
+    },
+
+    async decrementLessonSpacesByID(lessonId) {
+      const endpoint = `${this.endpoints.host}${this.endpoints.lessons}/${lessonId}`;
+
+      try {
+        // Fetch the current lesson based on its ID
+        const lesson = await this.getLessonByID(lessonId);
+
+        // Calculate the new spaces value by decrementing 1
+        const newSpaces = lesson.spaces - 1;
+
+        // Update the lesson spaces with a PUT request
+        const response = await fetch(endpoint, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ spaces: newSpaces }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Failed to update lesson spaces: ${response.statusText}`);
+        }
+
+        const updatedLesson = await response.json();
+        console.log('Lesson spaces updated successfully:', updatedLesson);
+        return updatedLesson;
+      } catch (error) {
+        console.error('Error updating lesson spaces by ID:', error.message);
+        throw error; // Rethrow the error if needed
+      }
+    },
+    async searchLessons() {
+      try {
+        let endpoint = "";
+
+        if (this.site.search_engine.query == "") {
+          this.fetchLessons();
+        } else {
+          endpoint = `${this.endpoints.host}${this.endpoints.lessons}?search=${this.site.search_engine.query}`;
+
+          const response = await fetch(endpoint);
+
+          const lessons = await response.json();
+          this.lessons.lessons = lessons;
+        }
+      } catch (error) {
+        console.error('Error fetching lessons:', error);
+      }
+    },
 
     fetchLessons() {
       this.getLessons().then((lessons) => {
         this.lessons.lessons = lessons;
       })
     },
+    // ========================= Requests =========================
     addToCart(lesson) {
       if (lesson.spaces != 0) {
         this.cart.lessons.push(lesson);
@@ -267,6 +350,7 @@ let app = new Vue({
       ) {
 
         this.submitOrder();
+        this.updateLessonsSpaces();
 
       } else if (isFormEmpty) {
         this.setPrompt(
@@ -356,47 +440,6 @@ let app = new Vue({
       this.resetCart();
       // Clear any existing prompts
       this.setPrompt("", false);
-    },
-
-    /**
-     * Sort lessons based on a specified attribute and order.
-     * @returns {Array} - The sorted array of lessons.
-    */
-    sortLessons() {
-      // Extract the sorting attribute and order from component properties
-      const attribute = this.sortBy;
-      const order = this.sortOrder === "asc" ? 1 : -1;
-
-      // Create a copy of the lessons array and sort it
-      return this.lessons.lessons.slice().sort((a, b) => {
-        // Compare the specified attribute of each lesson
-        if (a[attribute] < b[attribute]) {
-          return -1 * order;
-        }
-        if (a[attribute] > b[attribute]) {
-          return 1 * order;
-        }
-        // If values are equal, maintain the current order
-        return 0;
-      });
-    },
-    async searchLessons() {
-      try {
-        let endpoint = "";
-
-        if (this.site.search_engine.query == "") {
-          this.fetchLessons();
-        } else {
-          endpoint = `${this.endpoints.host}${this.endpoints.lessons}?search=${this.site.search_engine.query}`;
-
-          const response = await fetch(endpoint);
-
-          const lessons = await response.json();
-          this.lessons.lessons = lessons;
-        }
-      } catch (error) {
-        console.error('Error fetching lessons:', error);
-      }
     },
 
     parseImageUrl(image_file_name) {
