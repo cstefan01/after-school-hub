@@ -50,6 +50,7 @@ let app = new Vue({
       host: "https://after-school-hub-env2.eba-iijwxnmm.eu-west-2.elasticbeanstalk.com",
       lessons: "/lessons",
       orders: "/orders",
+      images: "/images"
     }
   },
   methods: {
@@ -82,7 +83,7 @@ let app = new Vue({
       };
 
       try {
-        const endpoint = `${this.endpoints.host}${this.endpoints.orders}1`;
+        const endpoint = `${this.endpoints.host}${this.endpoints.orders}`;
 
         const response = await fetch(endpoint, header);
 
@@ -397,6 +398,11 @@ let app = new Vue({
         console.error('Error fetching lessons:', error);
       }
     },
+
+    parseImageUrl(image_file_name) {
+      return `${this.endpoints.host}${this.endpoints.images}/${image_file_name}`;
+
+    }
   },
   beforeMount() {
     this.pages.lessons_page = true;
@@ -434,7 +440,5 @@ let app = new Vue({
 
       return this.lessons.lessons;
     },
-
-
   },
 });

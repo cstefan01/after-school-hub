@@ -84,7 +84,7 @@
                     <div class="lessons-container col-12">
                         <div class="lesson-card" v-for="lesson in filteredLessons" :key="lesson.id">
                             <div class="lesson-icon">
-                                <img :src="lesson.image.path" :alt="lesson.image.alt">
+                                <img :src="parseImageUrl(lesson.image.path)" :alt="lesson.image.alt">
                                 <div class="details">
                                     <i :class="lesson.icon"></i>
                                     <p v-text="lesson.subject"></p>
